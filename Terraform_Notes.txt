@@ -1,7 +1,7 @@
 Terraform Notes:
 ================
 
-* 	In Terraform, data blocks are used to retrieve data from external sources, such as APIs or databases, and make that data available to your Terraform configuration. With data blocks, you can use information from external sources to drive your infrastructure as code, making it more dynamic and flexible.
+1.	In Terraform, data blocks are used to retrieve data from external sources, such as APIs or databases, and make that data available to your Terraform configuration. With data blocks, you can use information from external sources to drive your infrastructure as code, making it more dynamic and flexible.
 
 	For example, you can use a data block to retrieve a list of Amazon Machine Images (AMIs) from AWS, and then use that data to select the appropriate AMI for a virtual machine you are provisioning:
 
@@ -25,9 +25,9 @@ Terraform Notes:
 		}
 
 
-*	Terraform by default provisions 10 resources concurrently during a `terraform apply` command to speed up the provisioning process and reduce the overall time taken.
+2. 	Terraform by default provisions 10 resources concurrently during a `terraform apply` command to speed up the provisioning process and reduce the overall time taken.
 
-*	The terraform state command and its subcommands can be used for various tasks related to the Terraform state.
+3.	The terraform state command and its subcommands can be used for various tasks related to the Terraform state.
 
 		Subcommands:
 		    identities          List the identities of resources in the state
@@ -39,7 +39,7 @@ Terraform Notes:
 		    rm                  Remove instances from the state
 		    show                Show a resource in the state
 
-*	Variable Reserved Names: Variable names cannot be any of the reserved names used by Terraform for specific constructs. 
+4.	Variable Reserved Names: Variable names cannot be any of the reserved names used by Terraform for specific constructs. 
 	These reserved names include: 
 			source, 
 			version, 
@@ -50,7 +50,7 @@ Terraform Notes:
 			depends_on,
 			locals
 
-*	terraform workspace list 
+5.	terraform workspace list 
 	This command will display a list of workspaces, with an asterisk * indicating the currently selected workspace. 
 
 	Select a different workspace.
@@ -58,17 +58,17 @@ Terraform Notes:
 
     terraform workspace select <workspace_name>
 
-*	The Terraform language uses the following types for its values: 
+6.	The Terraform language uses the following types for its values: 
 		string, 
 		number, 
 		bool, 
 		list (or tuple), 
 		map (or object). 
 
-*	The correct prefix string for setting input variables using environment variables in Terraform is TF_VAR. 
+7.	The correct prefix string for setting input variables using environment variables in Terraform is TF_VAR. 
 	This prefix is recognized by Terraform to assign values to variables.
 
-*	To destroy all Terraform-managed resources except for a single resource, you can use the terraform state command to remove the state for the resources you want to preserve. 
+8.	To destroy all Terraform-managed resources except for a single resource, you can use the terraform state command to remove the state for the resources you want to preserve. 
 	This effectively tells Terraform that those resources no longer exist, so it will not attempt to destroy them when you run terraform destroy.
 
 	Here's an example of how you could do this:
