@@ -151,4 +151,8 @@ Terraform Notes:
           }
         }
 
-18. 
+18. The terraform force-unlock command can be used to remove the lock on the Terraform state for the current configuration. 
+    Another option is to use the "terraform state rm" command followed by the "terraform state push" command to forcibly overwrite the state on the remote backend, effectively removing the lock. 
+    It's important to note that these commands should be used with caution, as they can potentially cause conflicts and data loss if not used properly.
+
+19. 
