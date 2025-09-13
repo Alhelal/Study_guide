@@ -119,7 +119,6 @@ Terraform Notes:
 13. Terraform can be expressed using two syntaxes: HashiCorp Configuration Language (HCL), which is the primary syntax for Terraform, and JSON.
 
 14. HashiCorp, the creator of Terraform, recommends using two spaces for indentation when writing Terraform code. This is a convention that helps to improve readability and consistency across Terraform configurations.
-
         For example, when defining a resource in Terraform, you would use two spaces to indent each level of the resource definition, as in the following example:
 
         resource "aws_instance" "example" {
