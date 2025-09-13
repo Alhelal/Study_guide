@@ -142,14 +142,14 @@ Terraform Notes:
 
         The validation block with condition = var.instance_count == 2 enforces that only the value 2 is accepted, and emits a clear error message otherwise. This leverages Terraform’s input variable validation for uniquely restrictive requirements.
 
-        variable "instance_count" {
+        `variable "instance_count" {
           type = number
 
           validation {
             condition     = var.instance_count >= 2
             error_message = "You must request at least two web instances."
           }
-        }
+        }`
 
 18. The terraform force-unlock command can be used to remove the lock on the Terraform state for the current configuration. 
     Another option is to use the "terraform state rm" command followed by the "terraform state push" command to forcibly overwrite the state on the remote backend, effectively removing the lock. 
@@ -158,4 +158,4 @@ Terraform Notes:
 19. Terraform is written in HashiCorp Configuration Language (HCL). However, Terraform also supports a syntax that is JSON compatible
 
         1. Terraform is primarily designed on  **immutable**  infrastructure principles
-        2. Terraform is also a **declarative** language, where you simply declare the desired state, and Terraform ensures that real-world resources match the desired state as written.
+        2. Terraform is also a ***declarative*** language, where you simply declare the desired state, and Terraform ensures that real-world resources match the desired state as written.
