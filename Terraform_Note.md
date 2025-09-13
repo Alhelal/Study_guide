@@ -103,3 +103,32 @@ Terraform Notes:
     ` terraform destroy -target (virtual machine) `
         
         You could also use terraform destroy -target (virtual machine) and destroy only the virtual machine and then run a terraform apply again.
+
+11. To manage the resources created manually by Ron and Ginny in Terraform without negatively impacting the availability of the deployed resources, Harry can follow the steps below:
+
+        1. Import the existing resources: Harry can use the terraform import command to import the existing resources into Terraform. The terraform import command allows you to import existing infrastructure into Terraform, creating a Terraform state file for the resources. You can also create an import block to pull in resources under Terraform management.
+
+        2. Modify the Terraform configuration: After importing the resources, Harry can modify the Terraform configuration to reflect the desired state of the resources. This will allow him to manage the resources using Terraform just like any other Terraform-managed resource
+
+        3. Test the changes: Before applying the changes, Harry can use the terraform plan command to preview the changes that will be made to the resources. This will allow him to verify that the changes will not negatively impact the availability of the resources.
+
+        4. Apply the changes: If the changes are correct, Harry can use the terraform apply command to apply the changes to the resources.
+
+12. The terraform login command can automatically obtain and save an API token for HCP Terraform.
+
+13. Terraform can be expressed using two syntaxes: HashiCorp Configuration Language (HCL), which is the primary syntax for Terraform, and JSON.
+
+14. HashiCorp, the creator of Terraform, recommends using two spaces for indentation when writing Terraform code. This is a convention that helps to improve readability and consistency across Terraform configurations.
+
+        For example, when defining a resource in Terraform, you would use two spaces to indent each level of the resource definition, as in the following example:
+
+        resource "aws_instance" "example" {
+          ami           = "ami-0c55b159cbfafe1f0"
+          instance_type = "t2.micro"
+
+          tags = {
+            Name = "example-instance"
+          }
+        }
+
+15. 
