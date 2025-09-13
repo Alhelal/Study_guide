@@ -65,4 +65,18 @@ Terraform Notes:
 		list (or tuple), 
 		map (or object). 
 
-*
+*	The correct prefix string for setting input variables using environment variables in Terraform is TF_VAR. 
+	This prefix is recognized by Terraform to assign values to variables.
+
+*	To destroy all Terraform-managed resources except for a single resource, you can use the terraform state command to remove the state for the resources you want to preserve. 
+	This effectively tells Terraform that those resources no longer exist, so it will not attempt to destroy them when you run terraform destroy.
+
+	Here's an example of how you could do this:
+
+		# Identify the resource you want to preserve. In this example, let's assume you want to preserve a resource named prod_db.
+
+		# Run terraform state list to see a list of all Terraform-managed resources.
+
+		# Run terraform state rm for each resource you want to keep, like the prod_db.
+
+		# Run terraform destroy to destroy all remaining resources.
