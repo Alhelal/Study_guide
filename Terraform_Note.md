@@ -137,3 +137,18 @@ Terraform Notes:
         1. terraform init: This command downloads and updates the required modules for the Terraform configuration. It also sets up the backend for state storage if specified in the configuration.
 
         2. terraform get: This command is used to download and update modules for a Terraform configuration. It can be used to update specific modules by specifying the module name and version number, or it can be used to update all modules by simply running the command without any arguments.
+
+17. Your team is developing a reusable Terraform module for web servers that must deploy exactly two instances, and you need to enforce this during the plan and apply phase.
+
+        The validation block with condition = var.instance_count == 2 enforces that only the value 2 is accepted, and emits a clear error message otherwise. This leverages Terraform’s input variable validation for uniquely restrictive requirements.
+
+        variable "instance_count" {
+          type = number
+
+          validation {
+            condition     = var.instance_count >= 2
+            error_message = "You must request at least two web instances."
+          }
+        }
+
+18. 
