@@ -155,4 +155,7 @@ Terraform Notes:
     Another option is to use the "terraform state rm" command followed by the "terraform state push" command to forcibly overwrite the state on the remote backend, effectively removing the lock. 
     It's important to note that these commands should be used with caution, as they can potentially cause conflicts and data loss if not used properly.
 
-19. 
+19. Terraform is written in HashiCorp Configuration Language (HCL). However, Terraform also supports a syntax that is JSON compatible
+
+        1. Terraform is primarily designed on <B> immutable </B> infrastructure principles
+        2. Terraform is also a declarative language, where you simply declare the desired state, and Terraform ensures that real-world resources match the desired state as written.
