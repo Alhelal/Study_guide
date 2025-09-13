@@ -159,3 +159,7 @@ Terraform Notes:
 
         1. Terraform is primarily designed on  **immutable**  infrastructure principles
         2. Terraform is also a ***declarative*** language, where you simply declare the desired state, and Terraform ensures that real-world resources match the desired state as written.
+
+20. The private registry feature in HCP Terraform allows users to publish and maintain custom modules within their organization, providing a secure and controlled environment for sharing infrastructure configurations.
+
+        You can use modules from a private registry, like the one provided by HCP Terraform. Private registry modules have source strings of the form <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>. This is the same format as the public registry but with an added hostname prefix.
