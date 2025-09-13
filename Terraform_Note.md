@@ -97,4 +97,4 @@ Terraform Notes:
 		For example, v1.0.4 and 0.9.2. To publish a module initially, at least one release tag must be present. Tags that don't look like version numbers are ignored.
 
 10. The terraform apply -replace command manually marks a Terraform-managed resource for replacement, forcing it to be destroyed and recreated on the apply execution.
-    You could also use terraform destroy -target <virtual machine> and destroy only the virtual machine and then run a terraform apply again.
+    You could also use terraform destroy -target (virtual machine) and destroy only the virtual machine and then run a terraform apply again.
