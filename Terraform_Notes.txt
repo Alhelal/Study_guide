@@ -57,3 +57,12 @@ Terraform Notes:
 	To switch to a different workspace, use the select command followed by the name of the desired workspace:
 
     terraform workspace select <workspace_name>
+
+*	The Terraform language uses the following types for its values: 
+		string, 
+		number, 
+		bool, 
+		list (or tuple), 
+		map (or object). 
+
+*
