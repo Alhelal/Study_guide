@@ -163,3 +163,12 @@ Terraform Notes:
 20. The private registry feature in HCP Terraform allows users to publish and maintain custom modules within their organization, providing a secure and controlled environment for sharing infrastructure configurations.
 
         You can use modules from a private registry, like the one provided by HCP Terraform. Private registry modules have source strings of the form <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>. This is the same format as the public registry but with an added hostname prefix.
+
+21. The required_version parameter in a terraform block is used to specify the minimum version of Terraform that is required to run the configuration. 
+    This parameter is optional, but it can be useful for ensuring that a Terraform configuration is only run with a version of Terraform that is known to be compatible.
+
+    For example, if your Terraform configuration uses features that were introduced in Terraform 1.9.2, you could include the following terraform block in your configuration to ensure that Terraform 1.9.2 or later is used:
+
+        terraform {
+          required_version = ">= 1.9.2"
+        }
