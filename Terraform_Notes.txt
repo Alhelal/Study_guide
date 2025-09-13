@@ -26,3 +26,34 @@ Terraform Notes:
 
 
 *	Terraform by default provisions 10 resources concurrently during a `terraform apply` command to speed up the provisioning process and reduce the overall time taken.
+
+*	The terraform state command and its subcommands can be used for various tasks related to the Terraform state.
+
+		Subcommands:
+		    identities          List the identities of resources in the state
+		    list                List resources in the state
+		    mv                  Move an item in the state
+		    pull                Pull current state and output to stdout
+		    push                Update remote state from a local state file
+		    replace-provider    Replace provider in the state
+		    rm                  Remove instances from the state
+		    show                Show a resource in the state
+
+*	Variable Reserved Names: Variable names cannot be any of the reserved names used by Terraform for specific constructs. 
+	These reserved names include: 
+			source, 
+			version, 
+			providers, 
+			count, 
+			for_each, 
+			lifecycle, 
+			depends_on,
+			locals
+
+*	terraform workspace list 
+	This command will display a list of workspaces, with an asterisk * indicating the currently selected workspace. 
+
+	Select a different workspace.
+	To switch to a different workspace, use the select command followed by the name of the desired workspace:
+
+    terraform workspace select <workspace_name>
