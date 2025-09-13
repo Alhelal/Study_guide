@@ -182,3 +182,21 @@ Terraform Notes:
         3. consul backend: This backend stores Terraform state in a Consul cluster. Consul provides a highly available and durable storage solution for Terraform state, and also provides features like locking and versioning that are important for collaboration.
 
         4. s3 backend: This backend stores Terraform state in an S3 bucket. S3 provides a highly available and durable storage solution for Terraform state, and is a popular option for storing Terraform state for large infrastructure deployments.
+
+23. By default, Terraform does not provide the ability to mask secrets in the Terraform plan and state files regardless of what provider you are using. 
+    While Terraform and Vault are both developed by HashiCorp and have a tight integration, masking secrets in Terraform plans and state files requires additional steps to securely manage sensitive information.
+
+24. An alias meta-argument is used when using the same provider with different configurations for different resources. This feature allows you to include multiple provider blocks that refer to different configurations. 
+
+    In this example, you would need something like this:
+
+        provider "aws" {
+          region  = "us-east-1"
+        }
+
+        provider "aws" {
+          region = "us-west-1"
+          alias  = "west"
+        }
+
+25. 
