@@ -130,4 +130,10 @@ Terraform Notes:
           }
         }
 
-15. 
+15. By default, terraform init downloads plugins into a subdirectory of the working directory, .terraform/providers so that each working directory is self-contained.
+
+16. The two Terraform commands used to download and update modules are:
+
+        1. terraform init: This command downloads and updates the required modules for the Terraform configuration. It also sets up the backend for state storage if specified in the configuration.
+
+        2. terraform get: This command is used to download and update modules for a Terraform configuration. It can be used to update specific modules by specifying the module name and version number, or it can be used to update all modules by simply running the command without any arguments.
