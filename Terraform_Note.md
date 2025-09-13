@@ -98,5 +98,7 @@ Terraform Notes:
 
 10.  <code> terraform apply -replace </code>
     command manually marks a Terraform-managed resource for replacement, forcing it to be destroyed and recreated on the apply execution.
+    
     ``` terraform destroy -target (virtual machine) ```
+    
     You could also use terraform destroy -target (virtual machine) and destroy only the virtual machine and then run a terraform apply again.
