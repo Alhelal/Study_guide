@@ -566,3 +566,5 @@ Kubernetes Interview questions
 
 
 ## Probes
+
+101. **What are Probes in Kubernetes?**
