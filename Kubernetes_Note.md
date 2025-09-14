@@ -10,7 +10,8 @@ Kubernetes Interview questions
 2.  **What is Docker and Why is it Popular in Containerization?**
 
     Answer: 
-        Docker is a software platform that simplifies the creation, deployment, and running of applications by using containers. It packages an application and its dependencies into a standardized unit called a container, ensuring it runs consistently across different environments. Docker uses Dockerfiles to automate the deployment of applications in containers, making it efficient and scalable for software development.
+        ```htm
+        Dockeris a software platform that simplifies the creation, deployment, and running of applications by using containers. It packages an application and its dependencies into a standardized unit called a container, ensuring it runs consistently across different environments. Docker uses Dockerfiles to automate the deployment of applications in containers, making it efficient and scalable for software development.``` 
 
 **3.  Explain the Concept of Container Orchestration.**
 
