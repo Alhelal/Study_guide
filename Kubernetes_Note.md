@@ -220,3 +220,55 @@ Kubernetes Interview questions
 
     **Answer:** 
         Probes are used in Kubernetes to determine the health of a container within a pod. There are two types of probes: Liveness probes are used to know when to restart a container, and Readiness probes are used to know when a container is ready to start accepting traffic. These probes help ensure that only healthy containers are used in deployments.
+
+## StatefulSets
+
+41. **What is a StatefulSet in Kubernetes and How Does it Differ from a Deployment?**
+
+    **Answer:** 
+        A StatefulSet is a Kubernetes workload API object used for managing stateful applications, which are applications that need to maintain a state or identity. Unlike Deployments, StatefulSets ensure that the pod identifiers and network hostnames are consistent even across rescheduling. They are ideal for applications like databases that require stable, unique network identifiers, persistent storage, and ordered, graceful deployment and scaling.
+
+42. **How Does Kubernetes Manage the Pod Identity in a StatefulSet?**
+
+    **Answer:** 
+        In a StatefulSet, each pod gets a unique, ordinal index and a stable network identity based on this index. The names of the pods are consistent and follow the pattern: [statefulset name]-[ordinal index]. This identity persists even if the pod gets rescheduled onto another node.
+
+43. **Explain How StatefulSets Handle Scaling and Updates.**
+
+    **Answer:** 
+        StatefulSets scale and update pods one at a time, in order, from the lowest ordinal to the highest. When scaling down, they remove pods in reverse ordinal order. During updates, StatefulSets support rolling updates where updates propagate sequentially from the first pod to the last.
+
+44. **What is the Role of Persistent Volumes in StatefulSets?**
+
+    **Answer:** 
+        Persistent Volumes (PVs) are essential for StatefulSets to provide stable storage that persists beyond the lifecycle of individual pods. Each pod in a StatefulSet can be associated with a Persistent Volume using Persistent Volume Claims (PVCs). This way, even if the pod is rescheduled, its data remains intact and attached to the pod.
+
+45. **Can You Describe Headless Services and Their Use with StatefulSets?**
+
+    **Answer:** 
+        A headless service in Kubernetes is a service with a clusterIP set to None. It’s often used with StatefulSets to provide a unique network identity to each pod. The headless service ensures that each pod gets a stable DNS entry, which is crucial for stateful applications that rely on stable network identifiers.
+
+46. **How Does a StatefulSet Maintain Pod Ordering and Uniqueness?**
+
+    **Answer:** 
+        StatefulSets maintain pod ordering and uniqueness using a governing service, which is a headless service that controls the network domain of the StatefulSet. The StatefulSet controller creates pods based on the ordinal index, ensuring that each pod is created and terminated in a predictable order.
+
+47. **What Happens to a StatefulSet When a Node Fails?**
+
+**Answer:** 
+    When a node fails, the pods in a StatefulSet on that node become unavailable. Kubernetes doesn't automatically reschedule these pods to other nodes. Instead, if the failed node returns to a functional state, the pods are restarted on it, preserving their state. For automatic failover, additional mechanisms like pod disruption budgets or node health checks should be implemented.
+
+48. **How Do You Update a StatefulSet, and What Are the Risks Involved?**
+
+    **Answer:** 
+        StatefulSets are updated using a rolling update strategy by default. You update the StatefulSet configuration, and Kubernetes applies the changes to each pod sequentially, respecting the ordering constraints. The primary risk in updating StatefulSets is related to the application-specific requirements for data integrity and consistency, as these applications often manage state.
+
+49. **Explain the Significance of podManagementPolicy in a StatefulSet.**
+
+    **Answer:** 
+        The podManagementPolicy of a StatefulSet determines how pods are managed within the StatefulSet. The two policies are OrderedReady, where pods are started sequentially, and Parallel, where pods are started or deleted simultaneously. OrderedReady is the default and ensures orderly deployment and scaling.
+
+50. **What are the Best Practices for Backing Up Data in a StatefulSet?**
+
+    **Answer:** 
+        Best practices for backing up data in a StatefulSet include regularly snapshotting the Persistent Volumes using tools like Velero, implementing a robust replication strategy if the application supports it (like in databases), and ensuring data consistency during backups. It's also advisable to store backups in a location independent of the Kubernetes cluster.
