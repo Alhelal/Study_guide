@@ -621,3 +621,70 @@ Kubernetes Interview questions
 
     **Answer:** 
         Readiness probes affect load balancing by informing the kube-proxy and the ingress controller about whether a pod is ready to receive traffic. If a readiness probe fails, Kubernetes marks the pod as not ready, and it won't receive traffic from services or ingress controllers. This ensures that traffic is only sent to pods that are fully started and ready to handle requests.
+
+
+## Helm
+
+11. **What is Helm in Kubernetes, and what are its main components?**
+
+    **Answer:** 
+        Helm is a package manager for Kubernetes, which simplifies the deployment and management of applications on Kubernetes clusters. Its main components are the Helm Client and the Tiller Server (in Helm 2; Helm 3 is tiller-less). Helm 3 introduces improvements like better security, simplified client-only architecture, and enhanced chart management. Charts, Helm's packaging format, describe a set of Kubernetes resources and configurations.
+
+12. **How does Helm 3 improve upon Helm 2?**
+
+    **Answer:** 
+        Helm 3 introduced significant changes: removal of Tiller (improving security), a new three-way strategic merge patch, simplified chart dependencies management, better namespace handling, and JSON schema chart value validation. These enhancements streamline user experience and increase security and reliability.
+
+13. **What are Helm Charts and how are they useful?**
+
+    **Answer:** 
+        Helm Charts are packages in Helm that contain all the necessary files and configurations to deploy an application, tool, or service inside a Kubernetes cluster. They promote reusability and can encapsulate complex Kubernetes resources, making it easier to share and deploy applications.
+
+14. **Can you explain Chart Hooks in Helm?**
+
+    **Answer:** 
+        Chart Hooks are a powerful feature in Helm that allow chart developers to add lifecycle events to their charts. These events (hooks) can perform operations at different stages of the chart installation, upgrade, or deletion process, such as database migrations or cleanup operations.
+
+15. **How do you manage dependencies in Helm 3?**
+
+    **Answer:** 
+        Helm 3 manages dependencies through the dependencies field in the Chart.yaml file. You can list all dependent charts and their versions here. Helm 3 simplifies dependency management by removing the need for a separate requirements.yaml file and allowing you to place dependencies directly in the charts/ directory or dynamically link them using the Chart.yaml.
+
+16. **What is a Helm Repository and how do you use it?**
+
+    **Answer:** 
+        A Helm Repository is a location where packaged charts can be stored and shared. It's essentially a collection of index.yaml files that reference the chart versions. You can add repositories to your Helm installation, search them for charts, and install charts from them into your Kubernetes cluster.
+
+17. **How do you update a Helm Chart in a cluster?**
+
+    **Answer:** 
+        To update a Helm Chart in a cluster, you use the helm upgrade command. This command takes the release name and the new chart or new chart version and updates the existing deployment, respecting any modifications to configurations. It’s an atomic operation that allows rollbacks in case of failures.
+
+18. **What is Helm Rollback and how does it work?**
+
+    **Answer:** 
+        Helm Rollback is used to revert a chart to its previous version. If a Helm upgrade fails or the application has issues, you can use helm rollback [RELEASE] [REVISION] to revert to a previous known stable state of your application.
+
+19. **Explain the process of creating a custom Helm Chart.**
+
+    **Answer:** 
+        Creating a custom Helm Chart involves several steps:
+
+            Initialize a new chart with helm create [chart name].
+
+            Edit the Chart.yaml file and define metadata.
+
+            Modify default templates or add new Kubernetes object templates in the templates/ directory.
+
+            Define default configuration values in values.yaml.
+
+            Optionally, add chart dependencies and custom hooks.
+
+            Package the chart with helm package [chart directory].
+
+            Test the chart with helm install --dry-run --debug.
+
+20. **How does Helm handle release management in Kubernetes?**
+
+    **Answer:** 
+        Helm manages Kubernetes application releases through Helm Charts. Each time a chart is installed, upgraded, or deleted, a new release is created. Helm tracks and manages these releases, allowing for features like rollbacks, revisions tracking, and release customization. It provides a higher-level abstraction for managing Kubernetes resources and simplifies complex deployment scenarios.
