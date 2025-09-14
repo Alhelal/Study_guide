@@ -26,6 +26,6 @@ Kubernetes Interview questions
 
     **Answer:**
         Namespaces are a feature of the Linux kernel that partitions kernel resources so that one set of processes sees one set of resources while another set of processes sees a different set of resources. In the context of containers, namespaces provide a layer of isolation by ensuring that containers only see their own processes, file systems, network, and users.
-![        ](https://github.com/Alhelal/Study_guide/blob/main/WhatIsNamespaceInKubernetes.jpeg)
+![        ](https://github.com/Alhelal/Study_guide/blob/main/Untitled%202.pdf)
 
 6.  
