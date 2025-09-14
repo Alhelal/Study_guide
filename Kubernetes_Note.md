@@ -12,9 +12,10 @@ Kubernetes Interview questions
     **Answer:** 
         Dockeris a software platform that simplifies the creation, deployment, and running of applications by using containers. It packages an application and its dependencies into a standardized unit called a container, ensuring it runs consistently across different environments. Docker uses Dockerfiles to automate the deployment of applications in containers, making it efficient and scalable for software development.
 
-**3.  Explain the Concept of Container Orchestration.
+3.  **Explain the Concept of Container Orchestration.**
 
-    Answer:**
+    **Answer:**
+        
         Container orchestration is the automated arrangement, coordination, and management of computer systems, middleware, and services. It involves managing the lifecycle of containers, especially in large, dynamic environments. Tools like Kubernetes, Docker Swarm, and Apache Mesos are used for orchestration, providing features like scaling, deployment, and management of containerized applications.
 
 4.  
