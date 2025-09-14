@@ -17,4 +17,7 @@ Kubernetes Interview questions
     **Answer:**
         Container orchestration is the automated arrangement, coordination, and management of computer systems, middleware, and services. It involves managing the lifecycle of containers, especially in large, dynamic environments. Tools like Kubernetes, Docker Swarm, and Apache Mesos are used for orchestration, providing features like scaling, deployment, and management of containerized applications.
 
-4.  
+4.  **How Does a Container Registry Work?**
+
+    **Answer:**
+        A container registry is a storage and content delivery system that holds named container images, available in different tagged versions. Users can push or pull images from the registry, making it a critical tool in the container lifecycle for version control and distribution of container images. Popular examples include Docker Hub and Google Container Registry.
