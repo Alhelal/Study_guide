@@ -20,4 +20,4 @@ Kubernetes Interview questions
 4.  **How Does a Container Registry Work?**
 
     **Answer:**
-        A container registry is a storage and content delivery system that holds named container images, available in different tagged versions. Users can push or pull images from the registry, making it a critical tool in the container lifecycle for version control and distribution of container images. Popular examples include Docker Hub and Google Container Registry.
+        A container registry is a storage and content delivery system that holds named container images, available in different tagged versions. Users can push or pull images from the registry, making it a critical tool in the container lifecycle for version control and distribution of container images. Popular examples include Docker Hub, AWS ECR, Google Container Registry.
