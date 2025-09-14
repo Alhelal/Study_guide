@@ -110,4 +110,4 @@ Kubernetes Interview questions
     **Answer:**
          A Kubernetes Service is an abstraction that defines a logical set of Pods and a policy by which to access them, typically using IP addresses. Services allow applications running in the Kubernetes cluster to communicate with each other and with the outside world. It assigns a fixed IP address to a group of Pods for consistent communication and load balancing.
 
-#### Kubernetes instalation
+### Kubernetes instalation
