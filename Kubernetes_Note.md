@@ -558,10 +558,9 @@ Kubernetes Interview questions
     **Answer:** 
         A headless Service in Kubernetes is a Service with no cluster IP. It is used for services that require direct access to individual Pods. With headless Services, you can use DNS to discover addresses for individual Pods.
 
-100.    **How Do Services Work with StatefulSets in Kubernetes?**
+100. **How Do Services Work with StatefulSets in Kubernetes?**
 
-    **Answer:** 
-        
+    **Answer:**  
         Services are often used with StatefulSets to provide a stable network identity to each pod in the set. Each pod in a StatefulSet gets a stable DNS name, managed by the Service, which is crucial for stateful applications like databases that rely on stable network identifiers for each replica.
 
 
