@@ -903,3 +903,110 @@ Kubernetes Interview questions
 
 
 ## Resource Management
+
+71. **What is Resource Management in Kubernetes and Why is it Important?**
+
+    **Answer:** 
+        Resource management in Kubernetes involves allocating and managing computational resources like CPU and memory for Pods and containers. It's essential for ensuring efficient use of hardware resources, maintaining application performance, and avoiding resource contention between applications. Proper resource management helps in maximizing the efficiency and stability of both applications and the Kubernetes cluster.
+
+72. **How Do You Specify Resource Requests and Limits in Kubernetes?**
+
+    **Answer:** 
+        Resource requests and limits are specified in the Pod specification. A request is the amount of that resource that Kubernetes guarantees to a Pod, while a limit is the maximum amount that a Pod is allowed to use. If a Pod exceeds its resource limit, it can be terminated or throttled depending on the resource type. Setting these values correctly is crucial for reliable and efficient operation of both the applications and the cluster.
+
+73. **Explain the Concept of Quality of Service (QoS) in Kubernetes.**
+
+    **Answer:** 
+        Kubernetes uses Quality of Service (QoS) classes to make decisions about scheduling and evicting Pods. There are three QoS classes: Guaranteed, Burstable, and BestEffort. 'Guaranteed' Pods are given the highest priority and are the last to be evicted in resource shortage scenarios, 'Burstable' Pods have some minimum resources guaranteed but can use more if available, and 'BestEffort' Pods have no guarantee of resources and are the first ones to be evicted.
+
+74. **What is the Role of the Scheduler in Kubernetes Resource Management?**
+
+    **Answer:** 
+        The Kubernetes Scheduler is responsible for assigning Pods to nodes. It makes these decisions based on resource availability, resource requests and limits of Pods, affinity/anti-affinity rules, taints and tolerations, and other scheduling criteria. The Scheduler ensures that each Pod is placed on a node that has sufficient resources to meet its needs.
+
+75. **How Do Kubernetes LimitRanges Work?**
+
+    **Answer:** 
+        LimitRanges are a policy to constrain resource allocations (CPU and memory) in a namespace. They can set default and maximum values for resources per Pod or container, and ensure that resource claims by Pods fall within the defined range. LimitRanges help in managing resource consumption in multi-tenant environments and prevent overuse of resources by a single namespace or application.
+
+76. **Describe Node Affinity in Kubernetes.**
+
+    **Answer:** 
+        Node Affinity in Kubernetes is a set of rules used by the scheduler to determine on which node a Pod can be placed. It allows you to constrain which nodes your Pod is eligible to be scheduled based on labels on nodes. For example, you can ensure that a Pod runs on a node with a specific CPU or memory configuration, or in a specific geographic location.
+
+77. **What is a Resource Quota in Kubernetes?**
+
+    **Answer:** 
+        Resource Quotas are a tool in Kubernetes that enable administrators to limit the aggregate resource consumption in a namespace. They can set hard limits on things like the total amount of memory or CPU that can be used by all Pods in a namespace, the number of Pods, Services, or PersistentVolumeClaims in a namespace, and more. This is particularly useful in multi-tenant clusters to prevent any single tenant from monopolizing cluster resources.
+
+78. **How Does Kubernetes Handle Resource Overcommitment?**
+
+    **Answer:** 
+        Kubernetes allows overcommitting resources to maximize resource utilization. Overcommitment means scheduling more Pods on a node than the resources it actually has, based on the assumption that not all Pods will use their allocated resources all the time. However, if resource demand exceeds the actual available resources, Kubernetes relies on QoS classes and resource limits to determine which Pods to throttle or evict.
+
+79. **What are Taints and Tolerations, and How Do They Affect Resource Management?**
+
+    **Answer:** 
+        Taints and Tolerations are a mechanism in Kubernetes that allows a node to repel a set of Pods. Taints are applied to nodes, and Tolerations are applied to Pods. Taints and Tolerations work together to ensure that Pods are not scheduled onto inappropriate nodes. This can be used as part of resource management to ensure that certain nodes are reserved for specific types of workloads based on their resource needs.
+
+80. **Discuss the Use of Horizontal Pod Autoscalers in Managing Resources.**
+
+    **Answer:** 
+        Horizontal Pod Autoscalers (HPA) automatically scale the number of Pods in a deployment, replica set, or stateful set based on observed CPU utilization or other custom metrics. HPAs help in managing resources by automatically adjusting the number of Pods to match the current load, thus ensuring that the application has the necessary resources while avoiding over-provisioning.
+
+
+## RBAC
+
+81. **What is RBAC in Kubernetes and Why is it Important?**
+
+    **Answer:** 
+        RBAC (Role-Based Access Control) in Kubernetes is a method for regulating access to Kubernetes API resources based on the roles of individual users or processes. It's important because it allows fine-grained control over who can access and perform actions on different resources in the cluster, enhancing security and minimizing the risk of unauthorized access.
+
+82. **Explain Roles and RoleBindings in Kubernetes RBAC.**
+
+    **Answer:** 
+        In Kubernetes RBAC, a Role is a set of permissions that apply to a specific namespace. It defines what actions a user, group, or service account can perform (like read, create, edit, delete) on various resources. A RoleBinding grants the permissions defined in a Role to a user, group, or service account. RoleBindings apply within a specific namespace.
+
+83. **What are ClusterRoles and ClusterRoleBindings?**
+
+    **Answer:** 
+        ClusterRoles and ClusterRoleBindings are similar to Roles and RoleBindings but apply cluster-wide. A ClusterRole can be used to grant permissions across the entire cluster or on specific resources that are not namespaced (like nodes). A ClusterRoleBinding grants the permissions defined in a ClusterRole to users, groups, or service accounts across the entire cluster.
+
+84. **How Do You Create and Manage RBAC Policies in Kubernetes?**
+
+    **Answer:** 
+        RBAC policies in Kubernetes are created and managed using YAML or JSON files that define Roles, RoleBindings, ClusterRoles, and ClusterRoleBindings. These files are applied to the cluster using kubectl apply. Administrators can create custom roles or use pre-defined roles provided by Kubernetes. Managing RBAC also involves regularly reviewing and updating roles and bindings as necessary.
+
+85. **Discuss the Principle of Least Privilege in the Context of Kubernetes RBAC.**
+
+    **Answer:**
+         The principle of least privilege is a security practice that recommends providing users only the access necessary to perform their job. In Kubernetes RBAC, this principle means assigning users, groups, or service accounts only the roles that grant them the minimum necessary permissions. This reduces the potential impact of errors or security breaches.
+
+86. **What is the Default RBAC Policy in a New Kubernetes Cluster?**
+
+    **Answer:** 
+        In a new Kubernetes cluster, RBAC is typically enabled by default. However, the default RBAC policy may vary depending on how the cluster is set up. Generally, system roles and bindings are created for critical components and users, but no additional user-specific roles or bindings are set up by default.
+
+87. **How Do Namespaces Affect RBAC in Kubernetes?**
+
+    **Answer:**
+         Namespaces provide a scope for RBAC Roles and RoleBindings. A Role or RoleBinding is namespace-specific, meaning it only grants access to resources within the same namespace. ClusterRoles and ClusterRoleBindings, however, are not limited by namespaces and apply to the entire cluster.
+
+88. **Explain the Use of Service Accounts with RBAC.**
+
+    **Answer:** 
+        Service accounts in Kubernetes are used to provide an identity for processes that run in a Pod. In RBAC, service accounts can be assigned roles or cluster roles, granting them specific permissions. This is particularly useful for giving the right level of access to applications or services running within the cluster.
+
+89. **Can You Extend or Customize Kubernetes RBAC?**
+
+    **Answer:** 
+        Kubernetes RBAC can be extended and customized by creating custom roles and role bindings. Administrators can define custom roles with specific permissions tailored to their organization's needs. However, the overall structure and functionality of RBAC cannot be altered as it is a core part of Kubernetes architecture.
+
+90. **What are Common Challenges in Managing Kubernetes RBAC?**
+
+    **Answer:** 
+        Common challenges in managing Kubernetes RBAC include complexity in large-scale environments, ensuring the principle of least privilege is followed, keeping RBAC policies up-to-date with changing requirements, and auditing and compliance tracking. To address these challenges, organizations often use RBAC management tools and implement strict policies for role definitions and assignments.
+
+
+## Storage and Volumes
+
