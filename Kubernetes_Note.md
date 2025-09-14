@@ -32,3 +32,23 @@ Kubernetes Interview questions
 
     **Answer:**
          Container networking enables containers to communicate with each other and with the outside world. This is achieved through various networking models like bridge networks, overlay networks, or host-based networks. Docker, for instance, creates a virtual bridge, allowing containers to communicate through it. Containers can also be configured to expose specific ports for outside communication.
+
+7.  **What is a Container Image and How is it Different from a Container?**
+
+    **Answer:**
+         A container image is a lightweight, standalone, executable package that includes everything needed to run a piece of software. It consists of the code, runtime, system tools, libraries, and settings. A container, on the other hand, is a runtime instance of an image. When an image is run, it exists in memory and has a state, whereas an image is a static file.
+
+8.  **Explain the Role of Dockerfile.**
+
+    **Answer:**
+         A Dockerfile is a script containing a series of instructions and commands used for creating a container image. It automates the process of building a Docker image. A Dockerfile defines what goes on in the environment inside a container. It can include instructions to install specific software, environmental variables, and startup commands.
+
+9.  **What are Microservices and How Do Containers Benefit Them?**
+
+    **Answer:**
+         Microservices architecture is a method of developing software applications as a suite of independently deployable, modular services. Containers are ideal for microservices due to their lightweight nature, allowing each service to be deployed in a separate container with its dependencies, ensuring isolation, resource efficiency, and scalability.
+
+10. **How Do You Monitor Containers and Their Performance?**
+
+    **Answer:**
+         Monitoring containers involves tracking metrics like CPU usage, memory consumption, I/O, network usage, and health status of containers. Tools like Prometheus, Grafana, Docker Monitoring, cAdvisor, and others are used for monitoring. They help in understanding the performance and status of containers, making it easier to manage large-scale container deployments.
