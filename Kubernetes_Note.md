@@ -77,26 +77,35 @@ Kubernetes Interview questions
          The kube-scheduler is responsible for assigning new pods to nodes. It selects the most suitable node for a pod based on several criteria, including resource requirements, quality of service requirements, affinity and anti-affinity specifications, and other constraints. The scheduler ensures that workloads are placed on the appropriate nodes to maintain efficiency.
 ![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/%20Scheduler.jpg)
 
-How Does the kube-controller-manager Work?
+15. **How Does the kube-controller-manager Work?**
 
-Answer: The kube-controller-manager runs various controller processes in the background. These controllers include the node controller, replication controller, endpoints controller, and others. Each controller watches the state of the cluster through the kube-apiserver and makes changes to move the current state towards the desired state.
+    **Answer:**
+         The kube-controller-manager runs various controller processes in the background. These controllers include the node controller, replication controller, endpoints controller, and others. Each controller watches the state of the cluster through the kube-apiserver and makes changes to move the current state towards the desired state.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/Kube-api-server.jpg)
 
-What is the kubelet and What is its Role in a Kubernetes Node?
+16. **What is the kubelet and What is its Role in a Kubernetes Node?**
 
-Answer: The kubelet is an agent running on each node in the cluster. It ensures that containers are running in a Pod. The kubelet takes a set of PodSpecs provided by the apiserver and ensures that the containers described in those PodSpecs are running and healthy. It communicates with the container runtime to manage container lifecycle.
+    **Answer:**
+         The kubelet is an agent running on each node in the cluster. It ensures that containers are running in a Pod. The kubelet takes a set of PodSpecs provided by the apiserver and ensures that the containers described in those PodSpecs are running and healthy. It communicates with the container runtime to manage container lifecycle.
 
-Explain the Function of kube-proxy in Kubernetes.
+17. **Explain the Function of kube-proxy in Kubernetes.**
 
-Answer: kube-proxy is a network proxy that runs on each node in the cluster, maintaining network rules that allow network communication to the Pods from network sessions inside or outside of the cluster. It ensures that the networking environment is predictable and accessible, but also isolated where necessary.
+    **Answer:**
+         kube-proxy is a network proxy that runs on each node in the cluster, maintaining network rules that allow network communication to the Pods from network sessions inside or outside of the cluster. It ensures that the networking environment is predictable and accessible, but also isolated where necessary.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/Kube-proxy-work.jpg)
 
-What is a Kubernetes Pod and How Does it Relate to Containers?
+18. **What is a Kubernetes Pod and How Does it Relate to Containers?**
 
-Answer: A Pod is the smallest deployable unit created and managed by Kubernetes. A Pod is a group of one or more containers, with shared storage/network, and a specification for how to run the containers. Containers in a Pod share an IP Address and port space, and can find each other via localhost. They also have access to shared volumes, allowing data to be shared between them.
+    **Answer:**
+         A Pod is the smallest deployable unit created and managed by Kubernetes. A Pod is a group of one or more containers, with shared storage/network, and a specification for how to run the containers. Containers in a Pod share an IP Address and port space, and can find each other via localhost. They also have access to shared volumes, allowing data to be shared between them.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/KubernetesPod.jpg)
 
-Describe the Role of Container Runtime in Kubernetes.
+19. **Describe the Role of Container Runtime in Kubernetes.**
 
-Answer: The container runtime is the software responsible for running containers. Kubernetes supports several container runtimes, like Docker, containerd, and CRI-O. It provides the environment to run containers, pulls images from a container image registry, and starts and stops containers.
+    **Answer:**
+         The container runtime is the software responsible for running containers. Kubernetes supports several container runtimes, like Docker, containerd, and CRI-O. It provides the environment to run containers, pulls images from a container image registry, and starts and stops containers.
 
-What are Kubernetes Services and How Do They Work?
+20. **What are Kubernetes Services and How Do They Work?**
 
-Answer: A Kubernetes Service is an abstraction that defines a logical set of Pods and a policy by which to access them, typically using IP addresses. Services allow applications running in the Kubernetes cluster to communicate with each other and with the outside world. It assigns a fixed IP address to a group of Pods for consistent communication and load balancing.
+    **Answer:**
+         A Kubernetes Service is an abstraction that defines a logical set of Pods and a policy by which to access them, typically using IP addresses. Services allow applications running in the Kubernetes cluster to communicate with each other and with the outside world. It assigns a fixed IP address to a group of Pods for consistent communication and load balancing.
