@@ -65,13 +65,17 @@ Kubernetes Interview questions
         The kube-apiserver is the front end of the Kubernetes control plane and serves as the main interface for the Kubernetes API. It processes RESTful requests to manage Kubernetes resources like pods, services, replication controllers, and others. It acts as a gateway to the etcd store and ensures that the cluster state matches the desired state described by the API.
 ![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/Kube-api-server.jpg)
 
-What is etcd and Why is it Important in Kubernetes?
+13. **What is etcd and Why is it Important in Kubernetes?**
 
-Answer: etcd is a distributed key-value store used by Kubernetes to store all cluster data. It’s a critical part of Kubernetes as it holds the entire state of the cluster, including node information, pods, configurations, secrets, and more. Being distributed ensures high availability and reliability.
+    **Answer:**
+        etcd is a distributed key-value store used by Kubernetes to store all cluster data. It’s a critical part of Kubernetes as it holds the entire state of the cluster, including node information, pods, configurations, secrets, and more. Being distributed ensures high availability and reliability.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/ETCD.jpg)
 
-Describe the Function of the kube-scheduler.
+14. **Describe the Function of the kube-scheduler.**
 
-Answer: The kube-scheduler is responsible for assigning new pods to nodes. It selects the most suitable node for a pod based on several criteria, including resource requirements, quality of service requirements, affinity and anti-affinity specifications, and other constraints. The scheduler ensures that workloads are placed on the appropriate nodes to maintain efficiency.
+    **Answer:**
+         The kube-scheduler is responsible for assigning new pods to nodes. It selects the most suitable node for a pod based on several criteria, including resource requirements, quality of service requirements, affinity and anti-affinity specifications, and other constraints. The scheduler ensures that workloads are placed on the appropriate nodes to maintain efficiency.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/%20Scheduler.jpg)
 
 How Does the kube-controller-manager Work?
 
