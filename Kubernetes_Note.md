@@ -255,8 +255,8 @@ Kubernetes Interview questions
 
 47. **What Happens to a StatefulSet When a Node Fails?**
 
-**Answer:** 
-    When a node fails, the pods in a StatefulSet on that node become unavailable. Kubernetes doesn't automatically reschedule these pods to other nodes. Instead, if the failed node returns to a functional state, the pods are restarted on it, preserving their state. For automatic failover, additional mechanisms like pod disruption budgets or node health checks should be implemented.
+    **Answer:** 
+        When a node fails, the pods in a StatefulSet on that node become unavailable. Kubernetes doesn't automatically reschedule these pods to other nodes. Instead, if the failed node returns to a functional state, the pods are restarted on it, preserving their state. For automatic failover, additional mechanisms like pod disruption budgets or node health checks should be implemented.
 
 48. **How Do You Update a StatefulSet, and What Are the Risks Involved?**
 
