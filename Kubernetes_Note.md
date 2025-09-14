@@ -21,3 +21,10 @@ Kubernetes Interview questions
 
     **Answer:**
         A container registry is a storage and content delivery system that holds named container images, available in different tagged versions. Users can push or pull images from the registry, making it a critical tool in the container lifecycle for version control and distribution of container images. Popular examples include Docker Hub, AWS ECR, Google Container Registry.
+
+5.  **What are Namespaces in the Context of Containers?**
+
+    **Answer:**
+        Namespaces are a feature of the Linux kernel that partitions kernel resources so that one set of processes sees one set of resources while another set of processes sees a different set of resources. In the context of containers, namespaces provide a layer of isolation by ensuring that containers only see their own processes, file systems, network, and users.
+
+6.  
