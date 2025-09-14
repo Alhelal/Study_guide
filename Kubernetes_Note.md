@@ -562,3 +562,6 @@ Kubernetes Interview questions
 
     **Answer:** 
         Services are often used with StatefulSets to provide a stable network identity to each pod in the set. Each pod in a StatefulSet gets a stable DNS name, managed by the Service, which is crucial for stateful applications like databases that rely on stable network identifiers for each replica.
+
+
+## Probes
