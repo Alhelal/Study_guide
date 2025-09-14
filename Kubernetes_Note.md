@@ -28,4 +28,7 @@ Kubernetes Interview questions
         Namespaces are a feature of the Linux kernel that partitions kernel resources so that one set of processes sees one set of resources while another set of processes sees a different set of resources. In the context of containers, namespaces provide a layer of isolation by ensuring that containers only see their own processes, file systems, network, and users.
 ![        ](https://github.com/Alhelal/Study_guide/blob/main/Pic/Untitled%202.jpg)
 
-6.  
+6.  **Describe Container Networking. How do Containers Communicate with Each Other?**
+
+    **Answer:**
+         Container networking enables containers to communicate with each other and with the outside world. This is achieved through various networking models like bridge networks, overlay networks, or host-based networks. Docker, for instance, creates a virtual bridge, allowing containers to communicate through it. Containers can also be configured to expose specific ports for outside communication.
