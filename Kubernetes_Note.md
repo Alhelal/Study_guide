@@ -559,8 +559,7 @@ Kubernetes Interview questions
         A headless Service in Kubernetes is a Service with no cluster IP. It is used for services that require direct access to individual Pods. With headless Services, you can use DNS to discover addresses for individual Pods.
 
 10. **How Do Services Work with StatefulSets in Kubernetes?**
-
-    
+  
     **Answer:** 
         Services are often used with StatefulSets to provide a stable network identity to each pod in the set. Each pod in a StatefulSet gets a stable DNS name, managed by the Service, which is crucial for stateful applications like databases that rely on stable network identifiers for each replica.
 
@@ -568,3 +567,6 @@ Kubernetes Interview questions
 ## Probes
 
 101. **What are Probes in Kubernetes?**
+
+    **Answer:**
+         Probes are diagnostic tools used by Kubernetes to determine the health of a container within a pod. They perform checks to ensure containers are running as expected. Kubernetes uses this information to make decisions about the pod, like restarting a container that's failing or stopping traffic to a container that's not ready to accept requests.
