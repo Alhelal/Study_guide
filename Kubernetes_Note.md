@@ -570,3 +570,54 @@ Kubernetes Interview questions
 
     **Answer:** 
          Probes are diagnostic tools used by Kubernetes to determine the health of a container within a pod. They perform checks to ensure containers are running as expected. Kubernetes uses this information to make decisions about the pod, like restarting a container that's failing or stopping traffic to a container that's not ready to accept requests.
+
+02. **Explain the Difference Between Liveness and Readiness Probes.**
+
+    **Answer:** 
+        Liveness probes determine if a container is running and healthy. If a liveness probe fails, Kubernetes restarts the container. Readiness probes determine if a container is ready to serve requests. If a readiness probe fails, Kubernetes stops routing traffic to the pod until it passes the readiness check. Liveness probes ensure reliability, while readiness probes ensure smooth traffic management.
+
+03. **How Does a Startup Probe Work in Kubernetes?**
+
+    **Answer:** 
+        A startup probe is used to indicate whether an application within a container has started. It’s useful for applications that have a slow startup time. Until the startup probe succeeds, the liveness and readiness checks are disabled. This prevents the application from being killed if it takes a long time to start.
+
+04. **What Types of Probes are Available in Kubernetes?**
+
+    **Answer:** 
+        Kubernetes supports three types of probes:
+
+            HTTP GET: Makes an HTTP GET request to the container’s IP address on a specified port and path.
+            
+            TCP Socket: Tries to establish a TCP connection to the specified port of the container.
+            
+            Exec: Executes a specified command inside the container. Success is determined by the command's exit status.
+
+05. **How Do You Configure Probes in a Kubernetes Pod?**
+
+    **Answer:** 
+        Probes are configured in the pod’s specification. For each probe (liveness, readiness, startup), you define the type of probe (HTTP GET, TCP Socket, Exec), along with parameters such as initialDelaySeconds, periodSeconds, timeoutSeconds, successThreshold, and failureThreshold.
+
+06. **Can Probes Affect the Performance of a Pod?**
+
+    **Answer:** 
+        Yes, probes can affect the performance of a pod, especially if they are configured with aggressive checking intervals (periodSeconds). This can lead to increased resource usage and network traffic. It's important to balance the need for timely health checks with the potential performance impact.
+
+07. **What is the Importance of initialDelaySeconds in a Probe Configuration?**
+
+    **Answer:** 
+        initialDelaySeconds is the time to wait before the first probe is initiated. This is important for applications that require some time to start up before they can serve traffic or before their health can be reliably checked. Setting this correctly prevents unnecessary restarts for slow-starting containers.
+
+08. **How Does Kubernetes React to Failing Liveness Probes?**
+
+    **Answer:** 
+        If a liveness probe fails, Kubernetes will restart the container. The failureThreshold parameter determines how many times the probe must fail before Kubernetes takes action. This mechanism ensures that containers that are no longer healthy can be restarted to try to restore normal operation.
+
+09. **In What Scenarios Should You Avoid Using Liveness Probes?**
+
+    **Answer:** 
+        You should avoid using liveness probes in scenarios where temporary issues such as short-lived spikes in resource usage, transient network issues, or short-term dependencies on external services would cause the probe to fail. In such cases, using a liveness probe can lead to unnecessary restarts and instability.
+
+10. **How Do Readiness Probes Affect Load Balancing in Kubernetes?**
+
+    **Answer:** 
+        Readiness probes affect load balancing by informing the kube-proxy and the ingress controller about whether a pod is ready to receive traffic. If a readiness probe fails, Kubernetes marks the pod as not ready, and it won't receive traffic from services or ingress controllers. This ensures that traffic is only sent to pods that are fully started and ready to handle requests.
