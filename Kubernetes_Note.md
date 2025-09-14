@@ -495,3 +495,70 @@ Kubernetes Interview questions
 
     **Answer:** 
         Kubernetes itself does not enforce strong isolation between namespaces; it’s more of an organizational tool. Security within namespaces relies on implementing network policies for controlling traffic between pods and namespaces, using RBAC for access control, and applying security contexts to pods and containers for privilege and access control at a more granular level.
+
+
+## Service
+
+91. **What is a Kubernetes Service and Why is it Important?**
+
+    **Answer:** 
+        A Kubernetes Service is an abstract way to expose an application running on a set of Pods as a network service. It provides a consistent and stable IP address, DNS name, and port and load balances the traffic among the Pods. Services are crucial for managing how clients access your application, as they provide a stable interface to a dynamic set of Pods.
+
+92. **Explain the Different Types of Services in Kubernetes.**
+
+    **Answer:** 
+        The main types of Services in Kubernetes are:
+
+            ClusterIP: Exposes the Service on an internal IP in the cluster, making it only reachable from within the cluster.
+
+            NodePort: Exposes the Service on the same port of each selected Node’s IP, making it accessible from outside the cluster.
+
+            LoadBalancer: Exposes the Service externally using a cloud provider’s load balancer.
+
+            ExternalName: Maps the Service to an external DNS name.
+
+93. **How Do Services Discover and Manage Traffic to Pods?**
+
+    **Answer:** 
+        Services discover Pods using label selectors. When you define a Service, you specify a set of labels that match a group of Pods. The Service routes traffic to these Pods using a round-robin algorithm by default. As Pods are created or destroyed, the Service automatically updates the group of Pods it targets.
+
+94. **What is the Role of Endpoints in Kubernetes Services?**
+
+    **Answer:** 
+        Endpoints in Kubernetes Services are objects that keep track of IP addresses and ports of Pods that match the Service’s selector. They are automatically managed by the Kubernetes control plane. When the Pods in a Service change, the Endpoints object is automatically updated to reflect these changes.
+
+95. **How Does a NodePort Service Work and When Would You Use it?**
+
+    **Answer:** 
+        A NodePort Service exposes the Service on each Node’s IP at a static port. When a client sends a request to a Node’s IP and NodePort, the request is forwarded to one of the Service’s Pods. NodePort is typically used when you want to make a Service accessible from outside the Kubernetes cluster, but do not have a LoadBalancer.
+
+96. **What is a LoadBalancer Service and How is it Different from NodePort and ClusterIP?**
+
+    **Answer:** 
+        A LoadBalancer Service exposes the Service externally using a cloud provider’s load balancer. It assigns a fixed, external IP address to the Service. Unlike NodePort, which exposes the Service on a port across all Nodes, LoadBalancer provides a single point of access. ClusterIP, on the other hand, only exposes the Service internally in the cluster.
+
+97. **How Do You Secure a Service in Kubernetes?**
+
+    **Answer:** 
+        To secure a Service in Kubernetes, you can:
+
+            Use Network Policies to restrict access to the Service.
+
+            Implement TLS/SSL for encrypted traffic to and from the Service.
+
+            Use authentication and authorization mechanisms for the clients accessing the Service.
+
+98. **Can You Update a Kubernetes Service Without Downtime? How?**
+
+    **Answer:** 
+        Yes, you can update certain aspects of a Kubernetes Service without downtime, such as updating labels or annotations. However, changing the Service type or ports can lead to downtime. For zero-downtime updates, you may need to create a new Service and gradually switch traffic to it.
+
+99. **Explain Headless Services in Kubernetes.**
+
+    **Answer:** 
+        A headless Service in Kubernetes is a Service with no cluster IP. It is used for services that require direct access to individual Pods. With headless Services, you can use DNS to discover addresses for individual Pods.
+
+100.    **How Do Services Work with StatefulSets in Kubernetes?**
+
+    **Answer:** 
+        Services are often used with StatefulSets to provide a stable network identity to each pod in the set. Each pod in a StatefulSet gets a stable DNS name, managed by the Service, which is crucial for stateful applications like databases that rely on stable network identifiers for each replica.
