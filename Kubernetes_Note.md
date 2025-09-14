@@ -566,6 +566,7 @@ Kubernetes Interview questions
 
 ## Probes
 
-**101.    What are Probes in Kubernetes?**
+101. **What are Probes in Kubernetes?** 
+
     **Answer:** 
          Probes are diagnostic tools used by Kubernetes to determine the health of a container within a pod. They perform checks to ensure containers are running as expected. Kubernetes uses this information to make decisions about the pod, like restarting a container that's failing or stopping traffic to a container that's not ready to accept requests.
