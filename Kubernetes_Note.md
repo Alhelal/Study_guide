@@ -63,6 +63,7 @@ Kubernetes Interview questions
 
     **Answer:** 
         The kube-apiserver is the front end of the Kubernetes control plane and serves as the main interface for the Kubernetes API. It processes RESTful requests to manage Kubernetes resources like pods, services, replication controllers, and others. It acts as a gateway to the etcd store and ensures that the cluster state matches the desired state described by the API.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/Kube-api-server.jpg)
 
 What is etcd and Why is it Important in Kubernetes?
 
