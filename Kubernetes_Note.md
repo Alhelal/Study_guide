@@ -525,7 +525,7 @@ Kubernetes Interview questions
 93. **How Do Services Discover and Manage Traffic to Pods?**
 
     **Answer:** 
-        Services discover Pods using label selectors. When you define a Service, you specify a set of labels that match a group of Pods. The Service routes traffic to these Pods using a round-robin algorithm by default. As Pods are created or destroyed, the Service automatically updates the group of Pods it targets.
+        Kubernetes Services manage traffic to Pods through a combination of stable DNS names, labels and selectors, and network proxying via kube-proxy. When you define a Service, you specify a set of labels that match a group of Pods. The Service routes traffic to these Pods using a round-robin algorithm by default. As Pods are created or destroyed, the Service automatically updates the group of Pods it targets.
 
 94. **What is the Role of Endpoints in Kubernetes Services?**
 
