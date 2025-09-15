@@ -531,6 +531,7 @@ Kubernetes Interview questions
 
     **Answer:** 
         Endpoints in Kubernetes Services are objects that keep track of IP addresses and ports of Pods that match the Service’s selector. They are automatically managed by the Kubernetes control plane. When the Pods in a Service change, the Endpoints object is automatically updated to reflect these changes.
+![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/EndpointService.jpg)
 
 95. **How Does a NodePort Service Work and When Would You Use it?**
 
