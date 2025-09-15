@@ -1073,155 +1073,185 @@ Kubernetes Interview questions
 
 ## Scheduling
 
-01. **What is the Role of the Scheduler in Kubernetes?
+01. **What is the Role of the Scheduler in Kubernetes?**
 
-Answer: The Kubernetes Scheduler is responsible for assigning newly created or unscheduled pods to nodes in the cluster. It makes this decision based on several factors such as resource requirements, hardware/software/policy constraints, affinity and anti-affinity specifications, data locality, and inter-workload interference.
+    **Answer:** 
+        The Kubernetes Scheduler is responsible for assigning newly created or unscheduled pods to nodes in the cluster. It makes this decision based on several factors such as resource requirements, hardware/software/policy constraints, affinity and anti-affinity specifications, data locality, and inter-workload interference.
 
-How Does Kubernetes Scheduler Ensure Pod Placement According to Resource Requirements?
+02. **How Does Kubernetes Scheduler Ensure Pod Placement According to Resource Requirements?**
 
-Answer: The Kubernetes Scheduler matches resource requirements like CPU and memory specified in the Pod spec against the available resources on nodes. It ensures that a Pod is scheduled on a node only if the node has sufficient available resources to meet the Pod's requirements.
+    **Answer:** 
+        The Kubernetes Scheduler matches resource requirements like CPU and memory specified in the Pod spec against the available resources on nodes. It ensures that a Pod is scheduled on a node only if the node has sufficient available resources to meet the Pod's requirements.
 
-What are Taints and Tolerations in Kubernetes, and How Do They Affect Scheduling?
+03. **What are Taints and Tolerations in Kubernetes, and How Do They Affect Scheduling?**
 
-Answer: Taints and tolerations work together to ensure that Pods are not scheduled onto inappropriate nodes. A taint is applied to a node and marks it to repel a set of Pods, unless those Pods tolerate the taint. Tolerations are applied to Pods and allow (but do not require) the Pods to schedule onto nodes with matching taints.
+    **Answer:** 
+        Taints and tolerations work together to ensure that Pods are not scheduled onto inappropriate nodes. A taint is applied to a node and marks it to repel a set of Pods, unless those Pods tolerate the taint. Tolerations are applied to Pods and allow (but do not require) the Pods to schedule onto nodes with matching taints.
 
-Explain Node Affinity and Anti-affinity in Kubernetes.
+04. **Explain Node Affinity and Anti-affinity in Kubernetes.**
 
-Answer: Node affinity and anti-affinity are rules used by the scheduler to place Pods on nodes based on labels on the nodes. Affinity rules attract Pods to nodes with specific labels, while anti-affinity rules repel Pods from nodes with specific labels. This is used to ensure that Pods are scheduled according to business, security, or compliance requirements.
+    **Answer:** 
+        Node affinity and anti-affinity are rules used by the scheduler to place Pods on nodes based on labels on the nodes. Affinity rules attract Pods to nodes with specific labels, while anti-affinity rules repel Pods from nodes with specific labels. This is used to ensure that Pods are scheduled according to business, security, or compliance requirements.
 
-How Can You Influence Pod Scheduling Decisions Apart from Using Taints, Tolerations, and Affinity?
+05. **How Can You Influence Pod Scheduling Decisions Apart from Using Taints, Tolerations, and Affinity?**
 
-Answer: Apart from taints, tolerations, and affinity, you can influence scheduling decisions using:
+    **Answer:** 
+        Apart from taints, tolerations, and affinity, you can influence scheduling decisions using:
 
-Node Selectors: Simple way to constrain Pods to nodes with specific labels.
+            Node Selectors: Simple way to constrain Pods to nodes with specific labels.
 
-Resource Limits and Requests: Defining resource requirements in Pod specifications.
+            Resource Limits and Requests: Defining resource requirements in Pod specifications.
 
-Pod Priority and Preemption: Assigning priority to Pods and allowing higher priority Pods to preempt lower priority ones.
+            Pod Priority and Preemption: Assigning priority to Pods and allowing higher priority Pods to preempt lower priority ones.
 
-Custom Scheduler: Implementing a scheduler that fits specific needs or policies.
+            Custom Scheduler: Implementing a scheduler that fits specific needs or policies.
 
-What Happens If a Pod Cannot Be Scheduled?
+06. **What Happens If a Pod Cannot Be Scheduled?**
 
-Answer: If a Pod cannot be scheduled (e.g., due to resource constraints, taints, or affinity rules), it remains in the Pending state. The scheduler continues to attempt to find a suitable node for the Pod until it can be successfully scheduled or the Pod is deleted.
+    **Answer:** 
+        If a Pod cannot be scheduled (e.g., due to resource constraints, taints, or affinity rules), it remains in the Pending state. The scheduler continues to attempt to find a suitable node for the Pod until it can be successfully scheduled or the Pod is deleted.
 
-How Does Kubernetes Handle Pod Scheduling Failure?
+07. **How Does Kubernetes Handle Pod Scheduling Failure?**
 
-Answer: In case of scheduling failure, Kubernetes provides feedback about why the Pod couldn’t be scheduled. This can be obtained using the kubectl describe pod [pod-name] command, which shows events including any scheduling failures. Cluster administrators can use this information to diagnose and resolve scheduling issues.
+    **Answer:** 
+        In case of scheduling failure, Kubernetes provides feedback about why the Pod couldn’t be scheduled. This can be obtained using the kubectl describe pod [pod-name] command, which shows events including any scheduling failures. Cluster administrators can use this information to diagnose and resolve scheduling issues.
 
-What is DaemonSet and How is its Scheduling Unique?
+08. **What is DaemonSet and How is its Scheduling Unique?**
 
-Answer: A DaemonSet ensures that a copy of a Pod runs on all (or some) nodes in the cluster. When nodes are added to the cluster, Pods are automatically added to them. When nodes are removed, those Pods are garbage collected. DaemonSets are typically used for node monitoring, log collection, or running system-level daemons.
+    **Answer:** 
+        A DaemonSet ensures that a copy of a Pod runs on all (or some) nodes in the cluster. When nodes are added to the cluster, Pods are automatically added to them. When nodes are removed, those Pods are garbage collected. DaemonSets are typically used for node monitoring, log collection, or running system-level daemons.
 
-Can You Schedule Pods to Specific Nodes Based on Their Hardware (CPU/GPU) Specifications?
+09. **Can You Schedule Pods to Specific Nodes Based on Their Hardware (CPU/GPU) Specifications?**
 
-Answer: Yes, you can schedule Pods on nodes based on specific hardware requirements using node labels and Pod node selectors or affinities. Nodes can be labeled according to their hardware specifications, and Pods can be configured to be scheduled on nodes that match these labels.
+    **Answer:** 
+        Yes, you can schedule Pods on nodes based on specific hardware requirements using node labels and Pod node selectors or affinities. Nodes can be labeled according to their hardware specifications, and Pods can be configured to be scheduled on nodes that match these labels.
 
-What are Pod Disruption Budgets and How Do They Affect Scheduling?
+10. **What are Pod Disruption Budgets and How Do They Affect Scheduling?**
 
-Answer: A Pod Disruption Budget (PDB) is a policy that limits the number of Pods of an application that can be down simultaneously during voluntary disruptions (like upgrades). PDBs are considered by the Kubernetes scheduler to prevent evictions that would violate the budget, ensuring high availability during maintenance operations.
+    **Answer:** 
+        A Pod Disruption Budget (PDB) is a policy that limits the number of Pods of an application that can be down simultaneously during voluntary disruptions (like upgrades). PDBs are considered by the Kubernetes scheduler to prevent evictions that would violate the budget, ensuring high availability during maintenance operations.
 
 
 ## Kubectl
 
-11. **What is kubectl and What is its Role in Kubernetes?
+11. **What is kubectl and What is its Role in Kubernetes?**
 
-Answer: kubectl is the command-line tool for interacting with the Kubernetes API server. It allows users to deploy applications, inspect and manage cluster resources, and view logs. kubectl converts command-line requests into API calls and communicates with the Kubernetes cluster to execute these requests.
+    **Answer:** 
+        kubectl is the command-line tool for interacting with the Kubernetes API server. It allows users to deploy applications, inspect and manage cluster resources, and view logs. kubectl converts command-line requests into API calls and communicates with the Kubernetes cluster to execute these requests.
 
-How Do You Create and Manage Resources in Kubernetes Using kubectl?
+12. **How Do You Create and Manage Resources in Kubernetes Using kubectl?**
 
-Answer: Resources in Kubernetes can be created using kubectl by applying YAML or JSON configuration files. Commands like kubectl create, apply, delete, and edit are used to manage these resources. For example, kubectl apply -f deployment.yaml would create or update resources defined in deployment.yaml.
+    **Answer:** 
+        Resources in Kubernetes can be created using kubectl by applying YAML or JSON configuration files. Commands like kubectl create, apply, delete, and edit are used to manage these resources. For example, kubectl apply -f deployment.yaml would create or update resources defined in deployment.yaml.
 
-Explain How to Use kubectl for Debugging Pods and Services.
+13. **Explain How to Use kubectl for Debugging Pods and Services.**
 
-Answer: kubectl provides various commands for debugging, such as:
+    **Answer:** 
+        kubectl provides various commands for debugging, such as:
 
-kubectl logs to retrieve logs from a container in a Pod.
+            kubectl logs to retrieve logs from a container in a Pod.
 
-kubectl describe to see detailed information about resources.
+            kubectl describe to see detailed information about resources.
 
-kubectl exec to execute commands inside a container.
+            kubectl exec to execute commands inside a container.
 
-kubectl get to list resources and check their status. These commands help diagnose issues and understand the state of the cluster.
+            kubectl get to list resources and check their status. These commands help diagnose issues and understand the state of the cluster.
 
-How Do You Scale Applications with kubectl?
+14. **How Do You Scale Applications with kubectl?**
 
-Answer: Applications can be scaled in Kubernetes using kubectl scale. For example, kubectl scale deployment my-deployment --replicas=5 changes the number of replicas in the my-deployment Deployment to 5. This adjusts the number of Pods running, allowing for scaling up or down based on requirements.
+    **Answer:** 
+        Applications can be scaled in Kubernetes using kubectl scale. For example, kubectl scale deployment my-deployment --replicas=5 changes the number of replicas in the my-deployment Deployment to 5. This adjusts the number of Pods running, allowing for scaling up or down based on requirements.
 
-What is the Process of Updating Applications Using kubectl?
+15. **What is the Process of Updating Applications Using kubectl?**
 
-Answer: Applications are updated in Kubernetes using rolling updates, which ensure zero downtime. This can be done with kubectl by updating the image or configuration of a Deployment. For instance, kubectl set image deployment/my-deployment my-container=newimage:tag updates the container image, triggering a rolling update.
+    **Answer:** 
+        Applications are updated in Kubernetes using rolling updates, which ensure zero downtime. This can be done with kubectl by updating the image or configuration of a Deployment. For instance, kubectl set image deployment/my-deployment my-container=newimage:tag updates the container image, triggering a rolling update.
 
-How Do You Monitor the Health and Status of a Kubernetes Cluster with kubectl?
+16. **How Do You Monitor the Health and Status of a Kubernetes Cluster with kubectl?**
 
-Answer: kubectl provides commands like kubectl get to list resources and view their status, kubectl describe to get detailed information about a resource, and kubectl top to view resource usage. These commands help monitor the health and performance of the cluster and its components.
+    **Answer:** 
+        kubectl provides commands like kubectl get to list resources and view their status, kubectl describe to get detailed information about a resource, and kubectl top to view resource usage. These commands help monitor the health and performance of the cluster and its components.
 
-Can You Explain How to Use Contexts and Configurations in kubectl?
+17. **Can You Explain How to Use Contexts and Configurations in kubectl?**
 
-Answer: Contexts in kubectl are used to switch between different clusters and namespaces. The kubectl config command is used to manage kubeconfig files that store cluster, user, and context configurations. For example, kubectl config use-context my-context switches to a different cluster or namespace saved in the kubeconfig file.
+    **Answer:** 
+        Contexts in kubectl are used to switch between different clusters and namespaces. The kubectl config command is used to manage kubeconfig files that store cluster, user, and context configurations. For example, kubectl config use-context my-context switches to a different cluster or namespace saved in the kubeconfig file.
 
-How Does kubectl Interact with the Kubernetes API?
+18. **How Does kubectl Interact with the Kubernetes API?**
 
-Answer: kubectl interacts with the Kubernetes API by sending HTTP requests to the API server. The command-line arguments and flags in kubectl commands are converted into API resource paths and query parameters. kubectl handles authentication, aggregates the API response, and displays the output to the user.
+    **Answer:** 
+        kubectl interacts with the Kubernetes API by sending HTTP requests to the API server. The command-line arguments and flags in kubectl commands are converted into API resource paths and query parameters. kubectl handles authentication, aggregates the API response, and displays the output to the user.
 
-What is the Role of kubectl in a CI/CD Pipeline?
+19. **What is the Role of kubectl in a CI/CD Pipeline?**
 
-Answer: In CI/CD pipelines, kubectl is used for deploying applications, managing resources, and ensuring the desired state of the cluster in different stages of the pipeline. It can be used in automation scripts and integrated with CI/CD tools to apply configurations, update images, and roll out changes to the Kubernetes cluster.
+    **Answer:** 
+        In CI/CD pipelines, kubectl is used for deploying applications, managing resources, and ensuring the desired state of the cluster in different stages of the pipeline. It can be used in automation scripts and integrated with CI/CD tools to apply configurations, update images, and roll out changes to the Kubernetes cluster.
 
-Discuss Advanced kubectl Commands and Their Uses.
+20. **Discuss Advanced kubectl Commands and Their Uses.**
 
-Answer: Advanced kubectl commands include:
+    **Answer:** 
+        Advanced kubectl commands include:
 
-kubectl port-forward for forwarding one or more local ports to a Pod.
+            kubectl port-forward for forwarding one or more local ports to a Pod.
 
-kubectl proxy to create a proxy server between your machine and the Kubernetes API server.
+            kubectl proxy to create a proxy server between your machine and the Kubernetes API server.
 
-kubectl cp to copy files and directories to and from containers in Pods.
+            kubectl cp to copy files and directories to and from containers in Pods.
 
-kubectl patch to update Kubernetes objects in place. These commands provide more control over interacting with and managing Kubernetes resources.
+            kubectl patch to update Kubernetes objects in place. These commands provide more control over interacting with and managing Kubernetes resources.
 
 
 ## Kustomize
 
-21. **What is Kustomize and How is it Integrated into Kubernetes?
+21. **What is Kustomize and How is it Integrated into Kubernetes?**
 
-Answer: Kustomize is a standalone tool to customize Kubernetes objects through a kustomization file. It introduces a template-free way to customize application configuration that simplifies the use of off-the-shelf applications. Integrated directly into kubectl since Kubernetes v1.14, Kustomize allows users to alter any API resource in a declarative fashion, using overlay files that modify resources without changing the original YAML files.
+    **Answer:** 
+        Kustomize is a standalone tool to customize Kubernetes objects through a kustomization file. It introduces a template-free way to customize application configuration that simplifies the use of off-the-shelf applications. Integrated directly into kubectl since Kubernetes v1.14, Kustomize allows users to alter any API resource in a declarative fashion, using overlay files that modify resources without changing the original YAML files.
 
-Explain the Concept of 'Overlays' in Kustomize.
+22. **Explain the Concept of 'Overlays' in Kustomize.**
 
-Answer: Overlays in Kustomize are a set of modifications that are applied over the base resources. They allow you to maintain variations of a configuration (like development, staging, and production environments) without duplicating resources. Overlays can alter configurations for specific environments by modifying properties, adding labels, changing image tags, etc.
+    **Answer:** 
+        Overlays in Kustomize are a set of modifications that are applied over the base resources. They allow you to maintain variations of a configuration (like development, staging, and production environments) without duplicating resources. Overlays can alter configurations for specific environments by modifying properties, adding labels, changing image tags, etc.
 
-How Does Kustomize Differ from Helm?
+23. **How Does Kustomize Differ from Helm?**
 
-Answer: Kustomize and Helm are both tools used to manage Kubernetes configurations, but they differ in approach. Kustomize uses a template-free approach and customizes YAML files through overlays, while Helm uses a templating engine to generate Kubernetes YAML files from templates. Kustomize focuses on customizing and patching Kubernetes objects, while Helm is more about packaging and distributing Kubernetes applications.
+    **Answer:** 
+        Kustomize and Helm are both tools used to manage Kubernetes configurations, but they differ in approach. Kustomize uses a template-free approach and customizes YAML files through overlays, while Helm uses a templating engine to generate Kubernetes YAML files from templates. Kustomize focuses on customizing and patching Kubernetes objects, while Helm is more about packaging and distributing Kubernetes applications.
 
-What is a Kustomization File and What is its Purpose?
+24. **What is a Kustomization File and What is its Purpose?**
 
-Answer: A kustomization file is a YAML configuration file in Kustomize. It specifies the Kubernetes resources to customize and the modifications to apply. It can include references to other resources, patches to apply, and other settings like name prefixes/suffixes, labels, and annotations. The kustomization file serves as the entry point for Kustomize to understand how to process the resources.
+    **Answer:** 
+        A kustomization file is a YAML configuration file in Kustomize. It specifies the Kubernetes resources to customize and the modifications to apply. It can include references to other resources, patches to apply, and other settings like name prefixes/suffixes, labels, and annotations. The kustomization file serves as the entry point for Kustomize to understand how to process the resources.
 
-How Do You Manage Different Kubernetes Environments with Kustomize?
+25. **How Do You Manage Different Kubernetes Environments with Kustomize?**
 
-Answer: Kustomize manages different environments by using overlays. Each environment (like development, staging, production) has its overlay directory containing a kustomization file that specifies environment-specific customizations. This approach allows for reusing the base configuration and applying only the necessary changes for each environment.
+    **Answer:** 
+        Kustomize manages different environments by using overlays. Each environment (like development, staging, production) has its overlay directory containing a kustomization file that specifies environment-specific customizations. This approach allows for reusing the base configuration and applying only the necessary changes for each environment.
 
-Can Kustomize Generate Resource Configurations Dynamically?
+26. **Can Kustomize Generate Resource Configurations Dynamically?**
 
-Answer: Yes, Kustomize can generate resource configurations dynamically. It can create new resources or modify existing ones based on various inputs and transformations. This includes creating ConfigMaps and Secrets from files, applying common labels, and setting or changing specific fields across multiple resources.
+    **Answer:** 
+        Yes, Kustomize can generate resource configurations dynamically. It can create new resources or modify existing ones based on various inputs and transformations. This includes creating ConfigMaps and Secrets from files, applying common labels, and setting or changing specific fields across multiple resources.
 
-What is the Role of 'Patches' in Kustomize?
+27. **What is the Role of 'Patches' in Kustomize?**
 
-Answer: Patches in Kustomize are used to modify or update Kubernetes resources. They allow you to change specific parts of a resource, such as adding containers to a deployment, updating environment variables, or altering the replica count. Patches provide a powerful way to apply targeted changes without altering the entire resource definition.
+    **Answer:** 
+        Patches in Kustomize are used to modify or update Kubernetes resources. They allow you to change specific parts of a resource, such as adding containers to a deployment, updating environment variables, or altering the replica count. Patches provide a powerful way to apply targeted changes without altering the entire resource definition.
 
-How Does Kustomize Handle ConfigMaps and Secrets?
+28. **How Does Kustomize Handle ConfigMaps and Secrets?**
 
-Answer: Kustomize has special features for creating and managing ConfigMaps and Secrets. It can generate these resources from files or literals and allows you to modify them with overlays. Kustomize ensures that whenever the contents of a ConfigMap or Secret change, it adjusts the hash suffix of these resources, triggering a rolling update if necessary.
+    **Answer:** 
+        Kustomize has special features for creating and managing ConfigMaps and Secrets. It can generate these resources from files or literals and allows you to modify them with overlays. Kustomize ensures that whenever the contents of a ConfigMap or Secret change, it adjusts the hash suffix of these resources, triggering a rolling update if necessary.
 
-Discuss How Kustomize Improves the Reusability of Kubernetes Manifests.
+29. **Discuss How Kustomize Improves the Reusability of Kubernetes Manifests.**
 
-Answer: Kustomize improves the reusability of Kubernetes manifests by separating base configurations from environment-specific customizations. This structure allows you to maintain a single set of base manifests and reuse them in different environments or scenarios by applying overlays. It reduces duplication and simplifies updates to the manifests.
+    **Answer:** 
+        Kustomize improves the reusability of Kubernetes manifests by separating base configurations from environment-specific customizations. This structure allows you to maintain a single set of base manifests and reuse them in different environments or scenarios by applying overlays. It reduces duplication and simplifies updates to the manifests.
 
-What Are Some Best Practices for Using Kustomize in a CI/CD Pipeline?
+30. **What Are Some Best Practices for Using Kustomize in a CI/CD Pipeline?**
 
-Answer: In a CI/CD pipeline, it’s best to keep base configurations and overlays in version control, use Kustomize to generate the final manifests dynamically during the CI/CD process, and apply the generated manifests to the appropriate Kubernetes clusters. It's also important to validate and test the generated configurations in the CI process before deploying them.
+    **Answer:** 
+        In a CI/CD pipeline, it’s best to keep base configurations and overlays in version control, use Kustomize to generate the final manifests dynamically during the CI/CD process, and apply the generated manifests to the appropriate Kubernetes clusters. It's also important to validate and test the generated configurations in the CI process before deploying them.
 
 
 ## GitOps
