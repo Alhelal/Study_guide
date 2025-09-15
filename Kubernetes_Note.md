@@ -1,6 +1,7 @@
 Kubernetes Interview questions
 ==============================
 
+## Containers
 
 1.  **What is a Container and How Does it Differ from a Virtual Machine?**
 
@@ -52,6 +53,9 @@ Kubernetes Interview questions
 
     **Answer:**
          Monitoring containers involves tracking metrics like CPU usage, memory consumption, I/O, network usage, and health status of containers. Tools like Prometheus, Grafana, Docker Monitoring, cAdvisor, and others are used for monitoring. They help in understanding the performance and status of containers, making it easier to manage large-scale container deployments.
+
+
+## Kubernetes components
 
 11. **What are the Main Components of a Kubernetes Cluster?**
 
