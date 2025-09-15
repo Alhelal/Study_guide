@@ -521,6 +521,7 @@ Kubernetes Interview questions
 
             ExternalName: Maps the Service to an external DNS name.
 ![      ](https://github.com/Alhelal/Study_guide/blob/main/Pic/ServiceTypes.jpg)
+
 93. **How Do Services Discover and Manage Traffic to Pods?**
 
     **Answer:** 
