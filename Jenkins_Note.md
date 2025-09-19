@@ -14,11 +14,11 @@ Jenkins Notes:
 
 3.  **Why should you not run builds in Jenkins master node?**
 
-    **Anwser:**
+    **Anwser:*
         Running builds directly on the Jenkins master node (now referred to as the controller or built-in node) is generally discouraged due to several key reasons:\
-            *Security Risks:*\
-&emsp;- [ ] Builds executed on the controller have unrestricted access to the JENKINS_HOME directory and the controller's file system. This poses a significant security vulnerability, as a compromised or malicious build could potentially access sensitive data like credentials, modify configurations, or even install malicious plugins, impacting the entire Jenkins installation.               
-(&nbsp;)- [ ] If different users have varying levels of access (e.g., some can configure jobs but not administer Jenkins), running builds on the controller can bypass these restrictions and grant unauthorized access to critical resources.
+&emsp;&emsp;*Security Risks:*\
+&emsp;&emsp;&emsp;&emsp;- [ ] Builds executed on the controller have unrestricted access to the JENKINS_HOME directory and the controller's file system. This poses a significant security vulnerability, as a compromised or malicious build could potentially access sensitive data like credentials, modify configurations, or even install malicious plugins, impacting the entire Jenkins installation.               
+&emsp;&emsp;&emsp;&emsp;- [ ] If different users have varying levels of access (e.g., some can configure jobs but not administer Jenkins), running builds on the controller can bypass these restrictions and grant unauthorized access to critical resources.
 
             Performance* and Scalability Issues:
                 
