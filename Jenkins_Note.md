@@ -19,10 +19,8 @@ Jenkins Notes:
 &emsp;&emsp;*Security Risks:*\
 &emsp;&emsp;&emsp;&emsp; - [ ] Builds executed on the controller have unrestricted access to the JENKINS_HOME directory and the controller's file system. This poses a significant security vulnerability, as a compromised or malicious build could potentially access sensitive data like credentials, modify configurations, or even install malicious plugins, impacting the entire Jenkins installation.               
 &emsp;&emsp;&emsp;&emsp; - [ ] If different users have varying levels of access (e.g., some can configure jobs but not administer Jenkins), running builds on the controller can bypass these restrictions and grant unauthorized access to critical resources.\
-&emsp;&emsp;*Performance and Scalability Issues:*\
-                
-&emsp;&emsp;&emsp;&emsp;The controller's primary role is to manage the Jenkins environment, handle HTTP requests, and orchestrate builds. Running computationally intensive builds directly on the controller can consume its resources, leading to performance degradation, slow UI responsiveness, and potential instability of the Jenkins instance itself.\
-&emsp;&emsp;&emsp;&emsp;This approach limits the scalability of your CI/CD pipeline. As the number of projects and builds grows, the controller can become a bottleneck, making it difficult to handle increased workload efficiently.\
-            
+&emsp;&emsp;*Performance and Scalability Issues:*\                
+&emsp;&emsp;&emsp;&emsp; - [ ] The controller's primary role is to manage the Jenkins environment, handle HTTP requests, and orchestrate builds. Running computationally intensive builds directly on the controller can consume its resources, leading to performance degradation, slow UI responsiveness, and potential instability of the Jenkins instance itself.\
+&emsp;&emsp;&emsp;&emsp; - [ ] This approach limits the scalability of your CI/CD pipeline. As the number of projects and builds grows, the controller can become a bottleneck, making it difficult to handle increased workload efficiently.\            
 &emsp;&emsp;*Resource Contention:*\
 &emsp;&emsp;&emsp;&emsp; Running builds on the controller can lead to resource contention between the Jenkins core processes and the build processes, potentially impacting the stability and reliability of both.
