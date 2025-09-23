@@ -240,3 +240,75 @@ Terraform Notes:
 31.	When configuring a remote backend in Terraform, it might be a good idea to purposely omit some of the required arguments to ensure secrets and other relevant data are not inadvertently shared with others. What alternatives are 			available to provide the remaining values to Terraform to initialize and communicate with the remote backend?
 
 		When configuring a remote backend in Terraform, it's important to avoid hardcoding sensitive data like secrets in your configuration files to prevent inadvertent sharing through version control. Instead, you can provide these values securely through alternative methods. One option is to provide the missing values interactively on the command line during terraform init, ensuring they aren't stored in code. Another approach is to use the -backend-config=PATH flag to specify a separate configuration file that can be excluded from Git repositories. Additionally, you can directly query HashiCorp Vault for secrets, allowing dynamic retrieval of credentials at runtime.
+
+32.	True or False? State is a requirement for Terraform to function.
+
+		True. 
+		Without state, Terraform would not be able to plan, apply, or manage changes to your infrastructure.
+
+33.	Which of the following describes the process of leveraging a local value within a Terraform module and exporting it for use by another module?
+
+		Exporting the local value as an output from the first module, then importing it into the second module's configuration.
+
+34.	In the example below, where is the value of the DNS record's IP address originating from?
+
+
+		resource "aws_route53_record" "www" {
+		  zone_id = aws_route53_zone.primary.zone_id
+		  name    = "www.helloworld.com"
+		  type    = "A"
+		  ttl     = "300"
+		  records = [module.web_server.instance_ip_addr]
+		}
+
+		the output of a module named web_server
+
+35.	What happens when a terraform apply command is executed?
+
+		applies the changes required in the target infrastructure in order to reach the desired configuration
+
+36.	True or False? You can migrate the Terraform backend but only if there are no resources currently being managed.
+
+		False
+		You can migrate the Terraform backend even if there are resources currently being managed. Migrating the backend involves moving the state file and configuration to a new location, which can be done without impacting the resources being managed by Terraform.
+
+37.	What is the downside to using Terraform to interact with sensitive data, such as reading secrets from Vault?
+
+		secrets are persisted to the state file
+		Using Terraform to interact with sensitive data like secrets from Vault can lead to the secrets being persisted to the state file. This poses a security risk as the state file may contain sensitive information that could be exposed if not properly managed or secured.
+
+38.	Which of the following actions are performed during a terraform init?
+
+		initializes the backend configuration
+		downloads the required modules referenced in the configuration
+		downloads the providers/plugins required to execute the configuration
+
+39.	You want to start managing resources that were not originally provisioned through infrastructure as code. Before you can import the resource's current state, what must you do before running the terraform import command?
+
+		update the Terraform configuration file to include the new resources that match the resources you want to import
+		Before running the terraform import command, you need to update the Terraform configuration file to include the new resources that match the resources you want to import. This step ensures that Terraform is aware of the resources you want to manage and can properly import their current state.
+
+40.	The `terraform apply -replace=` command is used to force a resource to be destroyed and recreated, even if there are no configuration changes that would require it. This is achieved by specifying the resource address that needs to be replaced, ensuring that the resource is recreated with the latest configuration.
+
+41.	Stephen is writing brand new code and needs to ensure it is syntactically valid and internally consistent. Stephen doesn't want to wait for Terraform to access any remote services while making sure his code is valid. What command can he use to accomplish this?
+
+		terraform validate
+		The 'terraform validate' command is used to check whether the configuration files are syntactically valid and internally consistent without accessing any remote services. It is a quick way to ensure that the code is correctly written and structured before attempting to apply it.
+
+42.	In order to make a Terraform configuration file dynamic and/or reusable, static values should be converted to use what?
+
+		input variables
+		Converting static values in a Terraform configuration file to use input variables allows for dynamic and reusable configurations. Input variables can be defined externally and passed into the Terraform configuration, making it easier to customize the behavior of the infrastructure without modifying the configuration file itself.
+
+43.	Which of the following best describes a Terraform provider?
+
+		a plugin that Terraform uses to translate the API interactions with the service or provider
+		A Terraform provider is a plugin that Terraform uses to interact with a specific service or provider. It translates the API interactions between Terraform and the service, allowing Terraform to manage resources in that service.
+
+44.	Which of the following Terraform files should be ignored by Git when committing code to a repo?
+
+		terraform.tfvars
+			The `terraform.tfvars` file contains variable values that are specific to a particular environment or deployment. It should be excluded from version control to prevent accidental exposure of sensitive information and to allow different environments to have their own variable values.
+
+		terraform.tfstate
+			The `terraform.tfstate` file stores the current state of the infrastructure managed by Terraform. It should not be committed to version control as it contains sensitive information and can be dynamically updated during Terraform operations.
