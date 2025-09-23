@@ -576,3 +576,193 @@ Terraform Notes:
 		remote runs
 		VCS connection
 		private registry
+
+77.	The command __ is used to extract the output values defined in the Terraform configuration.
+
+		terraform output
+
+78.	Rigby is implementing Terraform and was given a configuration that includes the snippet below. Where is this particular module stored?
+
+			module "consul" {
+			  source  = "hashicorp/consul/aws"
+			  version = "0.1.0"
+			}
+
+		public Terraform registry
+		The source "hashicorp/consul/aws" in the module configuration indicates that the module is stored in the public Terraform registry. This means that the module can be accessed and downloaded by anyone using Terraform, making it a convenient and widely available option for sharing and reusing modules.
+
+79.	Jeff is a DevOps Engineer for a large company and is currently managing the infrastructure for many different applications using Terraform. Recently, Jeff received a request to remove a specific VMware virtual machine from Terraform as the application team no longer needs it. Jeff opens his terminal and issues the command:
+
+			$ terraform state rm vsphere_virtual_machine.app1
+
+			Removed vsphere_virtual_machine.app1
+			Successfully removed 1 resource instance(s).
+
+		The next time that Jeff runs a terraform apply, the resource is not marked to be deleted. In fact, Terraform is stating that it is creating another identical resource.
+
+		.....
+		An execution plan has been generated and is shown below.  
+		Resource actions are indicated with the following symbols:
+		  + create
+
+		Terraform will perform the following actions:
+
+		  # vsphere_virtual_machine.app1 will be created
+	What would explain this behavior?
+
+	Jeff removed the resource from the state file, and not the configuration file. Therefore, Terraform is no longer aware of the virtual machine and assumes Jeff wants to create a new one since the virtual machine is still in the Terraform configuration file
+
+80.	Terraform is designed to work only with public cloud platforms, and organizations that wish to use it for on-premises infrastructure (private cloud) should look for an alternative solution.
+
+		False
+		Terraform is not exclusively designed for public cloud platforms. It is a flexible tool that can be used to manage infrastructure across different environments, including on-premises infrastructure (private cloud). 
+
+81.	Using the Terraform code below, where will the resource be provisioned?
+
+			provider "aws" {
+			  region = "us-east-1"
+			}
+
+			provider "aws" {
+			  alias  = "west"
+			  region = "us-west-2"
+			}
+
+			provider "aws" {
+			  alias  = "eu"
+			  region = "eu-west-2"
+			}
+
+			resource "aws_instance" "vault" {
+			  ami                    = data.aws_ami.amzlinux2.id
+			  instance_type          = "t3.micro"
+			  key_name               = "krausen_key"
+			  vpc_security_group_ids = var.vault_sg
+			  subnet_id              = var.vault_subnet
+			  user_data              = file("vault.sh")
+
+			  tags = {
+			    Name = "vault"
+			  }
+			}
+
+		us-east-1
+		The resource "aws_instance" named "vault" will be provisioned in the "us-east-1" region because the default provider configuration specifies this region. Since no alias is provided for this provider, it is the default provider for the resource.
+
+82.	Based on the Terraform code below, what block type is used to define the VPC?
+
+			vpc_id = aws_vpc.main.id
+			...
+
+		resource block
+
+83.	What function does the terraform init -upgrade command perform?
+
+		update all previously installed plugins and modules to the newest version that complies with the configuration’s version constraints
+
+84.	Ralphie has executed a terraform apply using a complex Terraform configuration file. However, a few resources failed to deploy due to incorrect variables. After the error is discovered, what happens to the resources that were successfully provisioned?
+
+		the resources that were successfully provisioned will remain as deployed
+
+85.	Given the following snippet of code, what will the value of the "Name" tag equal after a terraform apply?
+
+			variable "name" {
+			  description = "The username assigned to the infrastructure"
+			  default = "data_processing"
+			}
+
+			variable "team" {
+			  description = "The team responsible for the infrastructure"
+			  default = "IS Team"
+			}
+
+			locals {
+			  name  = (var.name != "" ? var.name : random_id.id.hex)
+			  owner = var.team
+			  common_tags = {
+			    Owner = local.owner
+			    Name  = local.name
+			  }
+			}
+
+		data_processing
+		The "Name" tag is derived from the local variable "name," which is determined by the value of the "name" variable provided in the Terraform configuration. Since the default value of the "name" variable is "data_processing," the "Name" tag will equal "data_processing." 
+
+86.	All of your infrastructure is managed by Terraform. Despite requests to avoid changes outside Terraform, engineers sometimes make minor updates directly in the cloud platform. What Terraform command can reconcile the state with the actual infrastructure to detect any drift from the last-known state?
+
+		terraform apply -refresh-only
+		The "terraform apply -refresh-only" command is used to reconcile the state with the real-world infrastructure by refreshing the state without making any changes. It detects any drift from the last-known state by comparing the current state with the actual infrastructure, highlighting any differences that need to be addressed.
+
+87.	Given the following snippet of code, what does servers = 4 reference?
+
+			module "servers" {
+			  source = "./modules/aws-servers"
+
+			  servers = 4
+			}
+
+		the value of an input variable
+		In Terraform, the `servers = 4` line in the code snippet refers to the value of an input variable named `servers`. This input variable is likely defined within the module "aws-servers" and is being set to a value of 4 in this particular instantiation of the module.
+
+88.	Teddy is using Terraform to deploy infrastructure using modules. Where is the module below stored?
+
+			module "monitoring_tools" {
+			  source = "./modules/monitoring_tools"
+
+			  cluster_hostname = module.k8s_cluster.hostname
+			}
+
+		locally on the instance running Terraform
+
+89.	Based on the code provided, how many subnets will be created in the AWS account?
+
+		variables.tf
+
+			variable "private_subnet_names" {
+			  type    = list(string)
+			  default = ["private_subnet_a", "private_subnet_b", "private_subnet_c"]
+			}
+			variable "vpc_cidr" {
+			  type    = string
+			  default = "10.0.0.0/16"
+			}
+			variable "public_subnet_names" {
+			  type    = list(string)
+			  default = ["public_subnet_1", "public_subnet_2"]
+			}
+		main.tf
+
+			resource "aws_subnet" "private_subnet" {
+			  count             = length(var.private_subnet_names)
+			  vpc_id            = aws_vpc.vpc.id
+			  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index)
+			  availability_zone = data.aws_availability_zones.available.names[count.index]
+
+			  tags = {
+			    Name      = var.private_subnet_names[count.index]
+			    Terraform = "true"
+			  }
+			}
+
+		3.
+		The code snippet creates subnets based on the number of elements in the "private_subnet_names" list, which has 3 elements. Therefore, 3 subnets will be created in the AWS account, each with a unique name and CIDR block within the VPC range.
+
+90.	When a terraform apply is executed, where is the AWS provider retrieving credentials to create cloud resources in the code snippet below?
+
+			provider "aws" {
+			   region     = us-east-1
+			   access_key = data.vault_aws_access_credentials.creds.access_key
+			   secret_key = data.vault_aws_access_credentials.creds.secret_key
+			}
+
+		from a data source that is retrieving credentials from HashiCorp Vault. Vault is dynamically generating the credentials on Terraform's behalf.
+		The code snippet is using a data source to retrieve AWS credentials from HashiCorp Vault. Vault dynamically generates these credentials on behalf of Terraform, ensuring secure and dynamic access to AWS resources without exposing sensitive information in the code.
+
+91.	Which block type is used to assign a name to an expression that can be used multiple times within a module without having to repeat it?
+
+		locals {}
+		The locals {} block type is used to define local variables within a Terraform module. By assigning a name to an expression using locals {}, you can reuse that expression multiple times within the module without having to repeat it, making your code more concise and maintainable.
+
+92.	When running the terraform validate command, which issue will be brought to your attention?
+
+		
