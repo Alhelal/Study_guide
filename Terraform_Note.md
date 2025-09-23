@@ -523,3 +523,56 @@ Terraform Notes:
 70.	In the terraform block, which configuration would be used to identify the specific version of a provider required?
 
 		required_providers
+
+71.	When using HCP Terraform, what is the easiest way to ensure the security and integrity of modules when used by multiple teams across different projects?
+
+		Use the HCP Terraform Private Registry to ensure only approved modules are consumed by your organization
+		Using the HCP Terraform Private Registry allows organizations to control and manage the modules that are available for consumption by their teams. This ensures that only approved and verified modules are used in different projects, enhancing security and integrity across the organization.
+
+72.	Which feature of HCP Terraform can be used to enforce fine-grained policies to enforce standardization and cost controls before resources are provisioned with Terraform?
+
+		sentinel and OPA
+		Sentinel and OPA are both policy as code tools that can be integrated with HCP Terraform to enforce fine-grained policies. These tools allow organizations to define and enforce policies that govern infrastructure provisioning, ensuring standardization and cost controls are in place before resources are provisioned with Terraform.
+
+73.	Your organization requires that no security group in your public cloud environment includes "0.0.0.0/0" as a source of network traffic. How can you proactively enforce this control and prevent Terraform configurations from being executed if they contain this specific string?
+
+		Create a Sentinel or OPA policy that checks for the string and denies the Terraform apply if the string exists
+		Creating a Sentinel or OPA policy that specifically checks for the presence of "0.0.0.0/0" in security group configurations allows for proactive enforcement of the control. By denying the Terraform apply if the string exists, you can prevent any configurations that violate the organization's security requirements from being executed.
+
+74.	Based on the following code, which code block will create a resource first?
+
+			resource "aws_instance" "data_processing" {
+			  ami           = data.aws_ami.amazon_linux.id
+			  instance_type = "t2.micro"
+
+			  depends_on = [aws_s3_bucket.customer_data]
+			}
+
+			module "example_sqs_queue" {
+			  source  = "terraform-aws-modules/sqs/aws"
+			  version = "2.1.0"
+
+			  depends_on = [aws_s3_bucket.customer_data, aws_instance.data_processing]
+			}
+
+			resource "aws_s3_bucket" "customer_data" {
+			  acl = "private"
+			}
+
+			resource "aws_eip" "ip" {
+			  vpc      = true
+			  instance = aws_instance.data_processing.id
+			}
+
+		aws_s3_bucket.customer_data
+
+75.	A main.tf file is always required when using Terraform?
+
+		False. 
+		While a main.tf file is often used to contain the primary configuration in Terraform projects, it is not always necessary. Terraform allows for modular and flexible file structures, so the configuration can be spread across multiple files or organized in a different way based on the project's needs. As long as the Terraform code can locate and interpret the configuration files, the presence of a main.tf file is not mandatory.
+
+76.	HCP Terraform provides organizations with many features not available to those running Terraform Community to deploy infrastructure. Select the ADDITIONAL features that organizations can take advantage of by moving to HCP Terraform.
+
+		remote runs
+		VCS connection
+		private registry
