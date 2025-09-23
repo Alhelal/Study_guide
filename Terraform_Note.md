@@ -450,4 +450,76 @@ Terraform Notes:
 
 		When a resource has a tilde (~) next to it in the terraform plan, it signifies that the resource will be updated in place, preserving its current state and making necessary modifications without recreating it.
 
-61.	
+61.	Which of the following is considered a Terraform plugin?
+
+		A Terraform provider is a type of plugin that extends Terraform's functionality by enabling it to interact with specific types of infrastructure APIs.
+
+62.	What happens when a terraform plan is executed?
+
+		creates an execution plan and determines what changes are required to achieve the desired state in the configuration files.
+
+63.	Frank has a file named main.tf which is shown below. Which of the following statements are true about this code? (select two)
+
+
+		module "servers" {
+		  source = "./modules/app-cluster"
+
+		  servers = 5
+		}
+
+
+		main.tf is the calling module
+		app-cluster is the child module
+
+64.	In HCP Terraform, a workspace can be mapped to how many VCS repos?
+
+		One.
+		In HCP Terraform, a workspace can be mapped to only one VCS (Version Control System) repository. This means that the workspace will be associated with a single repository where the Terraform configuration files are stored and managed.
+
+65.	By default, where does Terraform Community/CLI store its state file?
+
+		current working directory
+
+66.	Kristen is using modules to provision an Azure environment for a new application. She is using the following code to specify the version of her virtual machine module. Which of the following Terraform features supports the versioning of a module? (select two)
+
+		module "compute" {
+		  source  = "azure/compute/azurerm"
+		  version = "5.1.0"
+
+		  resource_group_name = "production_web"
+		  vnet_subnet_id      = azurerm_subnet.aks-default.id 
+		}
+
+		private registry
+		Private registries allow organizations to host and manage their own modules internally. By using a private registry, Kristen can version her modules internally and ensure that her infrastructure deployments are consistent and controlled within her organization.
+
+67.	Multiple providers can be declared within a single Terraform configuration file.
+
+		True.
+		Multiple providers can indeed be declared within a single Terraform configuration file. This allows users to manage resources from different cloud providers or services within the same Terraform configuration, making it easier to maintain and manage infrastructure across various platforms.
+
+68.	By default, a child module will have access to all variables set in the calling (parent) module.
+
+		False.
+		by default, a child module in Terraform does not inherit all variables set in the calling (parent) module. The parent module must explicitly pass variables to the child module by defining input variables in the child module's configuration.
+
+69.	What Terraform feature is shown in the example below?
+
+			 resource "aws_security_group" "example" {
+			  name = "sg-app-web-01"
+
+			  dynamic "ingress" {
+			    for_each = var.service_ports
+			    content {
+			      from_port = ingress.value
+			      to_port   = ingress.value
+			      protocol  = "tcp"
+			    }
+			  }
+			}
+
+		dynamic block
+
+70.	In the terraform block, which configuration would be used to identify the specific version of a provider required?
+
+		required_providers
