@@ -212,3 +212,31 @@ Terraform Notes:
         The plan output shows what resources Terraform would create, modify, or delete, which allows you to review and validate the expected changes. After reviewing the plan, you can then manually apply the changes to your infrastructure through the HCP Terraform workspace.
 
         Note: You can absolutely configure a Terraform workspace to automatically apply the changes to the code, although that is generally not recommended, nor is it the default action.
+
+28. You found a module on the Terraform Registry that will provision the resources you need. What information can you find on the Terraform Registry to help you quickly use this module?
+
+		Every page on the registry has a search field for finding modules. Enter any type of module you're looking for (examples: "vault," "vpc," "database"), and the resulting modules will be listed. The search query will look at the module name, provider, and description to match your search terms. On the results page, filters can be used to further refine search results.
+		https://developer.hashicorp.com/terraform/registry/modules/use
+
+29. In order to check the current version of Terraform you have installed, you can use the command
+
+	terraform version
+
+30.	Given the Terraform configuration below, which order will the resources be created?
+
+			resource "aws_instance" "web_server" {
+			    ami = "i-abdce12345"
+			    instance_type = "t2.micro"
+			}
+
+			resource "aws_eip" "web_server_ip" { 
+			    vpc = true 
+			    instance = aws_instance.web_server.id 
+			}
+
+		aws_instance will be created first
+		aws_eip will be created second
+
+31.	When configuring a remote backend in Terraform, it might be a good idea to purposely omit some of the required arguments to ensure secrets and other relevant data are not inadvertently shared with others. What alternatives are 			available to provide the remaining values to Terraform to initialize and communicate with the remote backend?
+
+		When configuring a remote backend in Terraform, it's important to avoid hardcoding sensitive data like secrets in your configuration files to prevent inadvertent sharing through version control. Instead, you can provide these values securely through alternative methods. One option is to provide the missing values interactively on the command line during terraform init, ensuring they aren't stored in code. Another approach is to use the -backend-config=PATH flag to specify a separate configuration file that can be excluded from Git repositories. Additionally, you can directly query HashiCorp Vault for secrets, allowing dynamic retrieval of credentials at runtime.
