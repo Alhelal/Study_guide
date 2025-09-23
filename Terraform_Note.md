@@ -312,3 +312,142 @@ Terraform Notes:
 
 		terraform.tfstate
 			The `terraform.tfstate` file stores the current state of the infrastructure managed by Terraform. It should not be committed to version control as it contains sensitive information and can be dynamically updated during Terraform operations.
+
+45.	Aaron deployed multiple VMs outside the Terraform workflow, and now your team is unsure which VM is managed by Terraform. What approach would best help you identify the Terraform-managed VM without making any changes to the infrastructure?
+
+		Use Terraform state commands (e.g., terraform state list and terraform state show) to match the tracked VM’s ID with the list of active VMs.
+		Using Terraform state commands like terraform state list and terraform state show to match the tracked VM's ID with the list of active VMs is a valid method to identify the Terraform-managed VM. By comparing the state information stored by Terraform with the actual VM instances, you can determine which VMs are managed by Terraform.
+
+46.	Please fill the blank field(s) in the statement by writing the appropriate word.
+
+		terraform console
+
+47.	When multiple engineers start deploying infrastructure using the same state file, what is a feature of remote state storage that is critical to ensure the state does not become corrupt?
+
+		state locking
+		State locking is a critical feature of remote state storage that prevents multiple engineers from deploying infrastructure using the same state file simultaneously. It ensures that only one engineer can make changes to the state at a time, preventing conflicts and potential corruption of the state file.
+
+48.	HCP Terraform can be managed from the CLI but requires an API token
+
+49.	When using variables in HCP Terraform, what level of scope can the variable be applied to?
+
+		HCP Terraform allows you to store important values in one place, which you can use across multiple projects. You can easily update the values, and the changes will apply to all projects that use them. Additionally, you can modify the values for specific projects without affecting others that use the same values. HCP Terraform allows you to use variables within a workspace, or use variable sets that can be used across multiple (or all) HCP Terraform workspaces.
+
+		Run-specific variables can be used by setting Terraform variable values using the -var and -var-file arguments in a single workspace
+
+		You can create a variable set by adding variables to the variable set and then applying a variable set scope so it can be used by multiple HCP Terraform workspaces
+
+		You can also apply the variable set globally, which will apply the variable set to all existing and future workspaces
+
+50.	Terraform language has built-in syntax for creating lists. Which of the following is the correct syntax to create a list in Terraform?
+
+		["string1", "string2", "string3"]
+		The square brackets [ ] are the correct syntax for creating lists in Terraform.
+
+51.	Rick is writing a new Terraform configuration file and wishes to use modules in order to easily consume Terraform code that has already been written. Which of the modules shown below will be created first?
+
+		terraform {
+		  required_providers {
+		    aws = {
+		      source = "hashicorp/aws"
+		    }
+		  }
+		}
+
+		provider "aws" {
+		  region = "us-west-2"
+		}
+
+		module "vpc" {
+		  source  = "terraform-aws-modules/vpc/aws"
+		  version = "2.21.0"
+
+		  name = var.vpc_name
+		  cidr = var.vpc_cidr
+
+		  azs             = var.vpc_azs
+		  private_subnets = var.vpc_private_subnets
+		  public_subnets  = var.vpc_public_subnets
+
+		  enable_nat_gateway = var.vpc_enable_nat_gateway
+
+		  tags = var.vpc_tags
+		}
+
+		module "ec2_instances" {
+		  source  = "terraform-aws-modules/ec2-instance/aws"
+		  version = "2.12.0"
+
+		  name           = "my-ec2-cluster"
+		  instance_count = 2
+
+		  ami                    = "ami-0c5204531f799e0c6"
+		  instance_type          = "t2.micro"
+		  vpc_security_group_ids = [module.vpc.default_security_group_id]
+		  subnet_id              = module.vpc.public_subnets[0]
+
+		  tags = {
+		    Terraform   = "true"
+		    Environment = "dev"
+		  }
+		}
+
+
+		module "vpc"
+		The module "vpc" will be created first because Terraform processes modules in the order they are defined in the configuration file. Since the "vpc" module is defined before the "ec2_instances" module in the file, it will be created and initialized first before moving on to the "ec2_instances" module.
+
+52.	True or False? Similar to Terraform Community, you must use the CLI to switch between workspaces when using HCP Terraform workspaces.
+
+		False. 
+		In HCP Terraform, you can switch between workspaces directly within the HCP Terraform web interface without the need to use the CLI. HCP Terraform provides a user-friendly interface that allows users to manage and switch between workspaces efficiently without relying solely on the CLI for workspace management.
+
+53.	What is the best and easiest way for Terraform to read and write secrets from HashiCorp Vault?
+
+		Vault provider
+		The Vault provider in Terraform allows for seamless integration with HashiCorp Vault, enabling Terraform to securely read and write secrets directly from Vault. This is the recommended and easiest way to manage secrets within Terraform configurations.
+
+54.	Workspaces provide similar functionality in the Community and HCP Terraform versions of Terraform.
+
+		False. 
+		While workspaces in the Community and HCP Terraform versions of Terraform serve the same purpose of managing multiple environments and configurations, there are differences in how they are implemented and accessed. HCP Terraform offers additional features and capabilities for managing workspaces, such as remote state management, collaboration tools, and version control integration, which are not available in the Community version.
+
+55.	What Terraform command can be used to inspect the current state file?
+
+		terraform show
+		The 'terraform show' command is used to inspect the current state file in Terraform. It displays the current state as Terraform sees it, including resource attributes and dependencies.
+
+56.	Using a dynamic block in Terraform allows you to iterate over a list of items, such as a list of required tcp ports, and dynamically create resources based on those items. This feature helps reduce the amount of code needed to define multiple similar resources, making it the ideal choice for adding multiple tcp ports to the new security group with minimal lines of code.
+
+57.	Which of the following allows Terraform users to apply policy as code to enforce standardized configurations for resources being deployed via infrastructure as code?
+
+		Sentinel is the correct choice as it is a policy as code framework that allows users to define and enforce policies for Terraform configurations. It enables users to apply standardized configurations, validate resource attributes, and ensure compliance with organizational policies before deploying infrastructure.
+
+58.	Terry is using a module to deploy some EC2 instances on AWS for a new project. He is viewing the code that is calling the module for deployment, which is shown below. Where does the value of the security group originate?
+
+		module "ec2_instances" {
+		  source  = "terraform-aws-modules/ec2-instance/aws"
+		  version = "4.3.0"
+
+		  name           = "my-ec2-cluster"
+		  instance_count = 2
+
+		  ami                    = "ami-0c5204531f799e0c6"
+		  instance_type          = "t2.micro"
+		  vpc_security_group_ids = [module.vpc.default_security_group_id]
+		  subnet_id              = module.vpc.public_subnets[0]
+
+		  tag = {
+		    Terraform   = "true"
+		    Environment = "dev"
+		  }
+
+
+		The value of the security group originates from the output of another module, specifically the default_security_group_id output of the vpc module. This allows for the reuse of existing resources and promotes modularity in Terraform code.
+
+59.	The terraform fmt command in Terraform is used to automatically format Terraform configuration files according to a consistent style defined by the Terraform language. This command helps ensure that your Terraform code follows a standard formatting convention, making it easier to read and maintain.
+
+60.	After executing a terraform plan, you notice that a resource has a tilde (~) next to it. What does this mean?
+
+		When a resource has a tilde (~) next to it in the terraform plan, it signifies that the resource will be updated in place, preserving its current state and making necessary modifications without recreating it.
+
+61.	
