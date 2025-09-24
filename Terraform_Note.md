@@ -765,4 +765,131 @@ Terraform Notes:
 
 92.	When running the terraform validate command, which issue will be brought to your attention?
 
-		
+
+
+
+93.	Terraform has detailed logs that can be enabled using the TF_LOG environment variable. Which of the following log levels is the most verbose, meaning it will log the most specific logs?
+
+		TRACE
+		The TRACE log level in Terraform is the most verbose level, providing the most detailed and specific logs. It logs every action taken by Terraform, including individual resource creation, updates, and deletions, making it ideal for troubleshooting and debugging complex issues.
+
+94.	What is the primary function of HCP Terraform agents?
+
+		execute Terraform plans and apply changes to infrastructure
+		HCP Terraform agents are primarily responsible for executing Terraform plans and applying changes to infrastructure. They act as the bridge between the HCP Terraform service and the target infrastructure, ensuring that the desired state of the infrastructure is achieved based on the Terraform configuration.
+
+95.	Michael has deployed many resources in AWS using Terraform and can easily update or destroy resources when required by the application team. A new employee, Dwight, is working with the application team and deployed a new EC2 instance through the AWS console. When Michael finds out, he decided he wants to manage the new EC2 instance using Terraform moving forward. He opens his terminal and types:
+
+	$ terraform import aws_instance.web_app_42 i-b54a26b28b8acv7233
+
+	However, Terraform returns the following error: Error: resource address "aws_instance.web_app_42" does not exist in the configuration.
+
+	What does Michael need to do first in order to manage the new Amazon EC2 instance with Terraform?
+
+		create a configuration for the new resource in the Terraform configuration file, such as:
+
+			resource "aws_instance" "web_app_42" {
+			  # (resource arguments)
+			}
+
+96.	You are working with a cloud provider to deploy resources using Terraform. You've added the following data block to your configuration. When the data block is used, what data will be returned?
+
+		data "aws_ami" "amzlinux2" {
+		  most_recent = true
+		  owners      = ["amazon"]
+
+		  filter {
+		    name   = "name"
+		    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+		  }
+		}
+
+		resource "aws_instance" "vault" {
+		  ami                         = data.aws_ami.amzlinux2.id
+		  instance_type               = "t3.micro"
+		  key_name                    = "vault-key"
+		  vpc_security_group_ids      = var.sg
+		  subnet_id                   = var.subnet
+		  associate_public_ip_address = "true"
+		  user_data                   = file("vault.sh")
+
+		  tags = {
+		    Name = "vault"
+		  }
+		}
+
+		all possible data of a specific Amazon Machine Image(AMI) from AWS
+		The data block "aws_ami" with the specified filters will return all possible data of a specific Amazon Machine Image (AMI) from AWS that matches the criteria set in the configuration. This includes information such as the AMI ID, description, architecture, root device type, and more.
+
+97.	What feature of Terraform provides an abstraction above the upstream API and is responsible for understanding API interactions and exposing resources?
+
+		Terraform provider
+		Terraform provider is the correct choice because it is a key component of Terraform that acts as an interface between Terraform and the upstream API of a specific service or platform.
+
+98.	You are deploying a new application and want to deploy it to multiple AWS regions within the same configuration file. Which of the following features will allow you to configure this?
+
+		multiple provider blocks using an alias
+
+99.	Infrastructure as Code (IaC) provides many benefits to help organizations deploy application infrastructure much faster than clicking around in the console. What are the additional benefits of IaC?
+
+		creates a blueprint of your data center
+		allows infrastructure to be versioned
+		code can easily be shared and reused
+
+100. A startup needs a way to ensure only its engineers and architects can create and publish approved Terraform modules. Which feature can provide this capability?
+
+		Private Registry
+		Private Registry allows organizations to host their own Terraform modules internally, ensuring that only authorized engineers and architects within the organization can access and use them. This feature provides the necessary security and control over proprietary infrastructure configurations.
+
+101. Any sensitive values referenced in the Terraform code, even as variables, will end up in plain text in the state file.
+
+		True. 
+		Any sensitive values referenced in the Terraform code, including variables, will be stored in plain text in the state file. This poses a security risk as anyone with access to the state file can potentially view these sensitive values, compromising the security of the infrastructure.
+
+102. Variables and their default values are typically declared in a main.tf or variables.tf file. What type of file can be used to set explicit values for the current working directory that will override the default variable values?
+
+		.tfvars file
+		The .tfvars file is used to set explicit values for variables in Terraform. By creating a .tfvars file in the current working directory, you can override the default variable values declared in main.tf or variables.tf. This allows for flexibility in providing specific values for variables without modifying the main configuration files.
+
+103. Which of the following best describes a "data source"?
+
+		enables Terraform to fetch data for use elsewhere in the Terraform configuration
+		A data source in Terraform enables the configuration to fetch data from an external source, such as an API or a cloud provider, to be used elsewhere in the Terraform configuration. This allows Terraform to dynamically retrieve information needed for resource provisioning.
+
+104. You have created a new workspace for a project and added all of your Terraform configuration files in the new directory. Before you execute a terraform plan, you want to validate the configuration using the terraform validate command. However, Terraform returns the error:
+
+			$ terraform validate
+			Error: Could not load plugin
+
+		the directory was not initialized
+
+105. Given a Terraform config that includes the following code, how would you reference the instance associated with the last key in the map as written?
+
+			resource "aws_instance" "database" {
+			  # ...
+			  for_each = {
+			    "vault":     "secrets",
+			    "terraform": "infrastructure",
+			    "consul":    "networking",
+			    "nomad":     "scheduler"
+			  }
+			}
+
+		aws_instance.database["nomad"]
+
+106. A terraform plan is a required step before running a terraform apply?
+
+		False.
+		While it is highly recommended to run a terraform plan to preview changes and ensure accuracy, it is not a mandatory step before running a terraform apply. You can directly apply your Terraform configuration without running a plan, but it is considered a best practice to do so to avoid unexpected outcomes.
+
+107. You have deployed your production environment with Terraform, and a developer has requested that you update a load balancer configuration to improve its compatibility with their application. Once you have modified your Terraform configuration, how can you conduct a dry run to verify that no unexpected changes will be made?
+
+		run  terraform plan and inspect the proposed changes
+
+108. To force the destruction of resources without being prompted for confirmation, you can use the command
+
+		terraform destroy -auto-approve
+
+109. What CLI command and flag can you use to delete a resource named azurerm_resource_group.production that is managed by Terraform?
+
+		terraform destroy -target=azurerm_resource_group.production
