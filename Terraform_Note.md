@@ -1077,3 +1077,7 @@ Terraform Notes:
 			}
 
 		terraform init -migrate-state
+
+134. You are using HCP Terraform to manage a new data analytics environment for your organization. You have decided to use Sentinel to enforce standardization and security controls. At what step are the Sentinel policies enforced during a run?
+
+		after the plan, run tasks, cost estimation phases but before the apply phase
