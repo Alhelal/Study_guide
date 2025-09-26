@@ -893,3 +893,88 @@ Terraform Notes:
 109. What CLI command and flag can you use to delete a resource named azurerm_resource_group.production that is managed by Terraform?
 
 		terraform destroy -target=azurerm_resource_group.production
+
+110. What CLI commands will completely tear down and delete all resources that Terraform is currently managing? (select two)
+
+		terraform destroy
+		terraform apply -destroy 
+			The `terraform apply -destroy` command is another way to completely tear down and delete all resources that Terraform is currently managing.
+
+
+111. You have an existing resource in your public cloud that was deployed manually, but you want the ability to reference different attributes of that resource throughout your configuration without hardcoding any values. How can you accomplish this?
+
+		Add a data block to your configuration to query the existing resource. Use the available exported attributes of that resource type as needed throughout your configuration to get the values you need.
+
+112. terraform validate will validate the syntax of your HCL files.
+
+		True. 
+		The `terraform validate` command is used to validate the syntax of your HashiCorp Configuration Language (HCL) files. It checks for any syntax errors or incorrect configurations in your Terraform code before attempting to apply or plan changes.
+
+113. You have recently cloned a repo containing Terraform that you want to test in your environment. Once you customize the configuration, you run a terraform apply but it immediately fails. Why would the apply fail?
+
+		Terraform needs to initialize the directory and download the required plugins
+
+114. You need to use Terraform to destroy and recreate a single database server that was deployed alongside other resources. You don't want to modify the Terraform code. What command can accomplish this task?
+
+		terraform apply -replace="aws_instance.database"
+		The correct command to destroy and recreate a single resource without modifying the Terraform code is terraform apply -replace="aws_instance.database". This command will replace the specified resource with a new one, effectively destroying and recreating it within the infrastructure.
+
+115. You have a module named prod_subnet that outputs the subnet_id of the subnet created by the module. How would you reference the subnet ID when using it for an input of another module? 
+
+		subnet = module.prod_subnet.subnet_id
+
+116. You need to use multiple resources from different providers in Terraform to accomplish a task. Which of the following can be used to configure the settings for each of the providers?
+
+
+			provider "consul" {
+			  address = "https://consul.krausen.com:8500"  
+			  namespace = "developer"
+			  token = "45a3bd52-07c7-47a4-52fd-0745e0cfe967"
+			}
+
+			provider "vault" {
+			  address = "https://vault.krausen.com:8200"
+			  namespace = "developer"
+			}
+		This choice correctly configures the settings for each provider by using the provider block for each provider separately. It specifies the address, namespace, and token for the "consul" provider and the address and namespace for the "vault" provider, allowing you to define the necessary configurations for each provider individually.
+
+117. After using Terraform locally to deploy cloud resources, you have decided to move your state file to an Amazon S3 remote backend. You configure Terraform with the proper configuration as shown below. What command should be run in order to complete the state migration while copying the existing state to the new backend?
+
+		terraform {
+		  backend "s3" {
+		    bucket = "tf-bucket"
+		    key = "terraform/krausen/"
+		    region = "us-east-1"
+		  }
+		}
+
+		terraform init -migrate-state
+
+118. When using HCP Terraform, creating a pull request on the branch of the workspace's linked repository will automatically trigger a speculative plan on a workspace.
+
+		True. 
+		When using HCP Terraform, creating a pull request on the branch of the workspace's linked repository will indeed automatically trigger a speculative plan on the workspace. This allows for changes to be previewed and evaluated before merging them into the main branch, ensuring smooth and controlled deployment processes.
+
+119. Steve is a developer who is deploying resources to AWS using Terraform. Steve needs to gather detailed information about an EC2 instance named "frontend"that he deployed earlier in the day. What command can Steve use to view this detailed information?
+
+		terraform state show aws_instance.frontend
+
+120. You have deployed your network architecture in AWS using Terraform. A colleague recently logged in to the AWS console and made a change manually and now you need to be sure your Terraform state reflects the new change.
+	What command should you run to update your Terraform state?
+
+		terraform apply -refresh-only
+
+121. Which of the following code snippets will properly configure a Terraform backend?
+
+		terraform {
+		  backend "remote" {
+		    hostname = "app.terraform.io"
+		    organization = "btk"
+
+		  workspaces {
+		    name = "bryan-prod"
+		  }
+		 }
+		}
+
+122. 
