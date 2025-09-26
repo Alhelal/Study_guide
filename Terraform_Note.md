@@ -1066,4 +1066,14 @@ Terraform Notes:
 			  }
 			}
 
-133. 
+133. After using Terraform locally to deploy cloud resources, you have decided to move your state file to an Amazon S3 remote backend. You configure Terraform with the proper configuration as shown below. What command should be run in order to complete the state migration while copying the existing state to the new backend?
+
+			terraform {
+			  backend "s3" {
+			    bucket = "tf-bucket"
+			    key = "terraform/krausen/"
+			    region = "us-east-1"
+			  }
+			}
+
+		terraform init -migrate-state
