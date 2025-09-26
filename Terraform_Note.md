@@ -977,4 +977,93 @@ Terraform Notes:
 		 }
 		}
 
-122. 
+122. A new variable has been created using the list type as shown below. How would you reference the element terraform in your configuration?
+
+			variable "products" {
+			    type = list(string)
+			    default = [
+			        "vault",
+			        "consul",
+			        "terraform",
+			        "boundary",
+			        "nomad"
+			    ]
+			}
+
+		var.products[2]
+
+123. When initializing Terraform, you notice that Terraform's CLI output states it is downloading the modules referenced in your code. Where does Terraform download and cache these modules?
+
+		in the .terraform/modules subdirectory in the current working directory
+
+124. Given the code snippet below, how would you refer to the value of ip  of an environment when using a for_each argument in a resource block?
+
+			variable "env" {
+			  type = map(any)
+			  default = {
+			    prod = {
+			      ip = "10.0.150.0/24"
+			      az = "us-east-1a"
+			    }
+			    dev  = {
+			      ip = "10.0.250.0/24"
+			      az = "us-east-1e"
+			    }
+			  }
+			}
+
+		each.value.ip
+		When using a for_each argument in a resource block, you can refer to the value of the ip attribute of an environment by using each.value.ip. This syntax allows you to access the value of the ip attribute for each element in the map variable defined in the env variable.
+
+125. Official Terraform providers and modules are owned and maintained by HashiCorp.
+
+		True. 
+		Official Terraform providers and modules are indeed owned and maintained by HashiCorp. These providers and modules are developed and supported directly by HashiCorp to ensure compatibility, reliability, and security for Terraform users.
+
+126. Which of the following best describes the primary use of Infrastructure as Code (IaC)?
+
+		the ability to programmatically deploy and configure resources
+
+127. Which of the following is the best description of a dynamic block?
+
+
+		produces nested configuration blocks instead of a complex typed value
+
+128. Which common action does not cause Terraform to refresh its state?
+
+		terraform state list
+		Running terraform state list does not cause Terraform to refresh its state. This command simply lists the resources in the state file without making any changes to the infrastructure. It is a read-only operation and does not trigger a state refresh.
+
+129. Terraform can only manage dependencies between resources if the depends_on argument is explicitly set for the dependent resources.
+
+		False. 
+		While the depends_on argument can be used to explicitly set dependencies between resources in Terraform, it is not the only way to manage dependencies. Terraform also automatically detects implicit dependencies based on resource references in the configuration, allowing it to handle resource dependencies without the need for explicit depends_on declarations.
+
+130. You are using modules to deploy various resources in your environment and have used a module named web to create the public_dns record. You want to provide a "friendly name" for the DNS of a new web server so you can simply click the CLI output and access the new website.
+	Which of the following code snippets would satisfy these requirements?
+
+		Output the value in the web module and add the following code to the parent module:
+
+			output "website" {
+			  description = "Outputs the URL of the provisioned website" 
+			  value       = "https://${module.web.public_dns}:8080/index.html"
+			}
+
+131. The terraform graph command can be used to generate a visual representation of a configuration or execution plan.
+
+		True. 
+		The terraform graph command is used to generate a visual representation of either the current configuration or the execution plan. It helps users understand the dependencies between resources and how they are connected in the infrastructure.
+
+132. You are using Terraform to manage resources in Azure. Due to unique requirements, you need to specify the version of the Azure provider so it remains the same until newer versions are thoroughly tested.
+	What block would properly configure Terraform to ensure it always installs the same Azure provider version?
+
+			terraform {
+			  required_providers {
+			    azurerm = {
+			      source = "hashicorp/azurerm"
+			      version = "2.90.0"
+			    }
+			  }
+			}
+
+133. 
