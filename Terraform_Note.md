@@ -1081,3 +1081,49 @@ Terraform Notes:
 134. You are using HCP Terraform to manage a new data analytics environment for your organization. You have decided to use Sentinel to enforce standardization and security controls. At what step are the Sentinel policies enforced during a run?
 
 		after the plan, run tasks, cost estimation phases but before the apply phase
+
+135. You have infrastructure deployed with Terraform. A developer recently submitted a support ticket to update a security group to permit a new port. To satisfy the ticket, you update the Terraform configuration to reflect the changes and run a terraform plan. However, a co-worker has since logged into the console and manually updated the security group to the same configuration.
+	What will happen when you run a terraform apply?
+
+		Nothing will happen. Terraform will validate that the infrastructure matches the desired state.
+		Terraform follows the principle of desired state configuration management. When you run a terraform apply, Terraform will compare the current state of the infrastructure with the desired state defined in the configuration. Since the manually updated security group matches the desired state in the Terraform configuration, Terraform will recognize that no changes are needed and will not modify the infrastructure.
+
+136. You are managing multiple resources using Terraform running in AWS. You want to destroy all the resources except for a single web server. How can you accomplish this?
+
+		run a terraform state rm to remove it from state and then destroy the remaining resources by running terraform destroy
+		Running a terraform state rm command will remove the specified resource from the Terraform state, allowing you to then run terraform destroy to remove all remaining resources except for the web server that was removed from the state. 
+
+137. You need to define a single input variable to support the IP address of a subnet, which is defined as a string, and the subnet mask, which is defined as a number. What type of variable should you use?
+
+		type = object ()
+		Using an object type variable allows you to define a single input variable that can hold multiple values, such as the IP address (string) and subnet mask (number). This type of variable is suitable for grouping related data together and maintaining the structure of the input data.
+
+138. When referencing a module, you must specify the version of the module in the calling module block.
+
+		False
+		It is false that you must specify the version of the module in the calling module block when referencing a module in Terraform. While it is recommended to pin module versions for reproducibility and stability, it is not a strict requirement. Terraform provides the flexibility to reference modules without specifying a version, making it easier to work with modules and manage dependencies.
+
+139. What feature does Terraform use to map configuration to resources in the real world?
+
+		state
+		Terraform uses the state feature to map configuration to resources in the real world. The state file keeps track of the current state of the infrastructure and helps Terraform understand which resources are currently managed and what changes need to be applied.
+
+140. Which statement below is true regarding using Sentinel in HCP Terraform?
+
+		Sentinel runs before a configuration is applied, therefore potentially reducing cost for public cloud resources
+		Sentinel policies are enforced between the plan and apply phases of a Terraform run in HCP Terraform. This means that Sentinel proactively prevents the provisioning of infrastructure that violates defined policies before it is actually created or modified. 
+
+141. You can use a combination of HCP Terraform's cost estimation feature and Sentinel policies to ensure your organization doesn't apply changes to your environment that would result in exceeding your monthly operating budget.
+
+		Yes, you can combine HCP Terraform's cost estimation feature with Sentinel policies to control costs and prevent budget overruns.
+
+142. After deploying a new virtual machine using Terraform, you find that the local script didn't run properly. However, Terraform reports the virtual machine was successfully created. How can you force Terraform to replace the virtual machine without impacting the rest of the managed infrastructure?
+
+		Use terraform apply -replace=<resource> to force Terraform to replace the resource during apply
+
+143. In order to use the terraform console command on an existing project, the CLI must be able to lock state to prevent changes.
+
+		True. 
+		The terraform console command allows users to explore the current state of Terraform resources interactively. In order to use this command, the CLI must be able to lock the state to prevent changes, ensuring that the state remains consistent during the interactive exploration process.
+
+144. 
