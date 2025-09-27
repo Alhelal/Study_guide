@@ -1126,4 +1126,97 @@ Terraform Notes:
 		True. 
 		The terraform console command allows users to explore the current state of Terraform resources interactively. In order to use this command, the CLI must be able to lock the state to prevent changes, ensuring that the state remains consistent during the interactive exploration process.
 
-144. 
+144. A coworker provided you with Terraform configuration file that includes the code snippet below. Where will Terraform download the referenced module from?
+
+			terraform {
+			  required_providers {
+			    kubernetes = {
+			      source = "hashicorp/kubernetes"
+			      version = "2.6.1"
+			    }
+			  }
+			}
+
+			provider "kubernetes" {
+			  # Configuration below
+			...
+
+		the official Terraform public registry
+
+145. You are using Terraform to manage some of your AWS infrastructure. You notice that a new version of the provider now includes additional functionality you want to take advantage of. What command do you need to run to upgrade the provider?
+
+		terraform init -upgrade
+		Running terraform init -upgrade is the correct command to upgrade the provider in Terraform. This command will initialize the working directory and upgrade the provider to the latest version available, including any additional functionality that may have been added.
+
+146. What feature of Terraform can you use to avoid repetition and make your code easier to maintain?
+
+		Modules
+		Variables
+		Locals
+		Dynamic Blocks
+
+147. You have an existing Google Cloud Compute Engine instance with ID my-instance that was created manually. Now, you want to manage this resource using Terraform.
+	Which command would you use to import the existing instance into your Terraform state?
+
+		terraform import google_compute_instance.my_instance my-instance
+
+148. Given the code snippet below, how would you identify the arn to be used in the output block that was retrieved by the data block?
+
+			data "aws_s3_bucket" "data_bucket" {
+			  bucket = "my-data-lookup-bucket-btk"
+			}
+			...
+
+			output "s3_bucket_arn" {
+			  value = ????
+			}
+
+		data.aws_s3_bucket.data_bucket.arn
+
+149. You have a number of different variables in a parent module that calls multiple child modules. Can the child modules refer to any of the variables declared in the parent module?
+
+		Not the variable, but it can only refer to values that are passed to the child module
+		In Terraform, child modules can only refer to values that are explicitly passed to them from the parent module. This means that child modules cannot directly access variables declared in the parent module.
+
+150. You want to restrict your team members to specific modules that are approved by the organization's security team when using HCP Terraform. What feature should you use?
+
+		HCP Terraform Private Registry
+
+151. What command can be used to display the resources that are being managed by Terraform?
+
+		terraform show
+
+152. Which of the following Terraform versions would be permitted to run the Terraform configuration based on the following code snippet?
+
+			terraform {
+			  required_version = "~> 1.0.0"
+
+			  required_providers {
+			    aws = {
+			      source  = "hashicorp/aws"
+			      version = "~> 5.66.0"
+			    }
+			    random = {
+			      source  = "hashicorp/random"
+			      version = "0.5.0"
+			    }
+			  }
+			}
+
+		Terraform v1.0.5
+
+153. You need to set the value for a Terraform input variable. Which of the following allows you to set the value using an environment variable?
+
+		export TF_VAR_user=dbadmin01
+		the `TF_VAR_` prefix followed by the variable name (`user` in this case) to set the value using an environment variable. By exporting `TF_VAR_user=dbadmin01`, the value of the `user` input variable in Terraform will be set to `dbadmin01`.
+
+154. You need to input variables that follow a key/value type structure. What type of variable would be used for this use case?
+
+		use a map to satisfy this requirement
+
+155. You have recently refactored your Terraform configuration, and a resource has been changed to be created within a module. As a result, the resource has changed from aws_instance.web to module.servers.aws_instance.web. To ensure that Terraform updates the state file correctly and does not recreate the resource, which block should you use in your configuration?
+
+		moved block
+		The "moved" block is used to inform Terraform that a resource has been moved to a new location within the configuration. By using this block and specifying the old and new resource locations, Terraform can update the state file correctly and avoid recreating the resource.
+
+156. 
